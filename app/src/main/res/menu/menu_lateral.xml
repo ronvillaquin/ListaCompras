@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group>
+
+    <item
+        android:id="@+id/itemListas"
+        android:title="@string/listas"
+        android:icon="@drawable/lista24" />
+
+    <item
+        android:id="@+id/itemAmigos"
+        android:title="@string/amigos"
+        android:icon="@drawable/amigos24"/>
+
+
+    <item
+        android:id="@+id/itemAjustes"
+        android:title="@string/ajustes"
+        android:icon="@drawable/ajustes24" />
+
+        <!--<item
+            android:id="@+id/itemInvitaciones"
+            android:title="@string/invitaciones"
+            android:icon="@drawable/notificacion24"/>-->
+
+
+    </group>
+
+    <group
+        android:id="@+id/divInferior">
+
+        <item
+            android:id="@+id/itemSalir"
+            android:title="@string/salir"
+            android:icon="@drawable/salir24" />
+
+    <item
+        android:id="@+id/itemPremium"
+        android:title="@string/premium"
+        android:icon="@drawable/premium24"/>
+
+    </group>
+
+</menu>

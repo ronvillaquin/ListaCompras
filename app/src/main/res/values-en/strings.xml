@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Shopping list</string>
+
+    <string name="prueba">test</string>
+
+
+    <!--    URL-->
+    <string name="urlPoliticas">http://terminosmenores.epizy.com/politica.html</string>
+
+    <string name="urlInicioSesion">http://rrvqlistacompras.freevar.com/inicioSesion.php</string>
+    <string name="urlEliminarLista">http://rrvqlistacompras.freevar.com/eliminarLista.php</string>
+    <string name="urlBuscarLista">http://rrvqlistacompras.freevar.com/buscarListas.php</string>
+    <string name="urlEditarLista">http://rrvqlistacompras.freevar.com/editarLista.php</string>
+    <string name="urlRegistrarUsuario">http://rrvqlistacompras.freevar.com/registrarUsuario.php</string>
+    <string name="urlRegistrarOmitir">http://rrvqlistacompras.freevar.com/registrarUsuarioOmitir.php</string>
+    <string name="urlRecuperarPass">http://rrvqlistacompras.freevar.com/recuperarPass.php</string>
+    <string name="urlAgregarLista">http://rrvqlistacompras.freevar.com/agregarLista.php</string>
+    <string name="urlBuscarArticulo">http://rrvqlistacompras.freevar.com/buscarArticulos.php?id_lista=</string>
+    <string name="urleditarArticulo">http://rrvqlistacompras.freevar.com/editarArticulo.php</string>
+    <string name="urleditarCheck">http://rrvqlistacompras.freevar.com/editarCheck.php</string>
+    <string name="urleditarChecktodos">http://rrvqlistacompras.freevar.com/editarTodosCheck.php</string>
+    <string name="urlagregarArticulo">http://rrvqlistacompras.freevar.com/agregarArticulo.php</string>
+    <string name="urlEliminarArticulo">http://rrvqlistacompras.freevar.com/eliminarArticulo.php</string>
+    <string name="urlEditarArticulo">http://rrvqlistacompras.freevar.com/editarArticulo.php</string>
+    <string name="urlBuscarAmigo">http://rrvqlistacompras.freevar.com/buscarAmigos.php</string>
+    <string name="urlAgregarAmigo">http://rrvqlistacompras.freevar.com/agregarAmigo.php</string>
+    <string name="urlEliminarAmigo">http://rrvqlistacompras.freevar.com/eliminarAmigo.php</string>
+    <string name="urlCreadorLista">http://rrvqlistacompras.freevar.com/creadorLista.php</string>
+    <string name="urlCantidadAmigos">http://rrvqlistacompras.freevar.com/cantidadAmigos.php</string>
+    <string name="urlCantidadProductos">http://rrvqlistacompras.freevar.com/cantidadProductos.php</string>
+    <string name="urlBuscarAmigosDraw">http://rrvqlistacompras.freevar.com/buscarAmigosDraw.php</string>
+    <string name="urlAgregarAmigoDraw">http://rrvqlistacompras.freevar.com/agregarAmigoDraw.php</string>
+    <string name="urlEliminarAmigoDraw">http://rrvqlistacompras.freevar.com/eliminarAmigoDraw.php</string>
+    <string name="urlEditarUsuario">http://rrvqlistacompras.freevar.com/editarUsuario.php</string>
+    <string name="urlEditarSwitch">http://rrvqlistacompras.freevar.com/editarSwitch.php</string>
+    <string name="urlDuplicarlista">http://rrvqlistacompras.freevar.com/duplicarListaProductos.php</string>
+
+
+    <!--    Este es mi baner-->
+    <string name="banner">ca-app-pub-3019606122027900/9370036752</string>
+    <!--    este es prueba-->
+    <!--    <string name="banner">ca-app-pub-3940256099942544/6300978111</string>-->
+
+    <!--    Toast para los mensajes-->
+
+    <string name="listaEliminada">Deleted List</string>
+    <string name="articuloEliminado">Item Removed</string>
+    <string name="amigoEliminado">Friend Deleted</string>
+    <string name="nombreEditado">Edited Name</string>
+    <string name="verifiqueusuarioycontrasena">Verify the USER and PASSWORD</string>
+    <string name="error">Error</string>
+    <string name="conexion">Connection error</string>
+    <string name="noseaceptancaracteres">The character is not accepted: </string>
+    <string name="verificarpass">Check passwords</string>
+    <string name="usuarioregistrado">Registered user</string>
+    <string name="usuarioEditado">Edited User</string>
+    <string name="emailyaexiste">Mail already exists</string>
+    <string name="sinlistas">No Lists</string>
+    <string name="sinproductos">No Products</string>
+    <string name="sinAmigos">There are no friends</string>
+    <string name="emailnoExiste">Mail does not exist</string>
+    <string name="emailExiste">Already exists in the list</string>
+    <string name="respuestasnocoinciden">Answers do not match</string>
+    <string name="passcambiado">Password changed</string>
+    <string name="passInvalido">Invalid password</string>
+    <string name="passRequerido">You must enter password</string>
+
+    <string name="usuarioPremium">The user is already PREMIUM</string>
+    <string name="desconectadodelpago">Disconnected from Google Play</string>
+    <string name="erespremium">You are already PREMIUM</string>
+    <string name="premiumBuscado">Premium searched in PREF</string>
+
+    <string name="nosepuedetumismousuario">Can´t add your own user</string>
+
+    <string name="actualizarApp">Update the App from Google Play</string>
+
+    <string name="puedeEditar">You can edit the list</string>
+    <string name="nopuedeEditar">Can´t edit the list</string>
+
+    <string name="noautorizado">You are not authorized to make changes</string>
+
+
+    <!--    Para los Layouts-->
+
+    <string name="versionPremium">Premium version</string>
+    <string name="eliminarAnuncios">Remove all Ads by </string>
+    <string name="adquirir">Acquire</string>
+    <string name="seleccionarAmigo">Saved Friends</string>
+    <string name="descripcion">Description</string>
+    <string name="iniciarsesion">Log in</string>
+    <string name="registrar">Sign up</string>
+    <string name="email">Email</string>
+    <string name="emailinvalido">Invalid email</string>
+    <string name="password">Password</string>
+    <string name="repitapass">Repeat Password</string>
+    <string name="olvidoPass">Forgot your password?</string>
+    <string name="registrate">SIGN UP</string>
+    <string name="omitirRegistro">SKIP REGISTRATION</string>
+    <string name="passminimo">Minimum password 6 characters</string>
+    <string name="preguntasdeseguridad">Security questions:</string>
+    <string name="pregunta1">Question 1</string>
+    <string name="pregunta2">Question 2</string>
+    <string name="respuesta1">Answer 1</string>
+    <string name="respuest2">Answer 2</string>
+    <string name="datos">Data</string>
+    <string name="nombre">Name</string>
+    <string name="apellido">Last name</string>
+    <string name="confirmarPass">Confirm Password</string>
+
+    <string name="recuperar">Recover</string>
+    <string name="recuperaPass">Recover password</string>
+    <string name="cambiarPass">Change Password</string>
+    <string name="buscar">Search</string>
+    <string name="buscarEmail">Add friend to list</string>
+    <string name="agragramigo">Add friend</string>
+
+    <string name="comprobar">Check</string>
+    <string name="guardar">Save</string>
+    <string name="nuevopass">New password</string>
+
+    <string name="agregarAmigosdesdeInicio">Save Friends \n From Start</string>
+    <string name="agregarAmigos">Add friends</string>
+    <string name="agregarProducto">Add Products</string>
+    <string name="agregarLista">Add Lists</string>
+    <string name="agregar">Add</string>
+    <string name="articulo">Item</string>
+    <string name="check">Check</string>
+
+    <string name="marcado">Marked</string>
+    <string name="cerodolar">$0</string>
+    <string name="cero">0</string>
+    <string name="uno">1</string>
+    <string name="sinmarcar">Unmarked</string>
+    <string name="total">Total</string>
+
+    <string name="nombreproducto">Product name</string>
+    <string name="cantidad">Quantity</string>
+    <string name="precio">Price $</string>
+    <string name="nota">Note</string>
+    <string name="requerido">Required</string>
+
+    <string name="abarrotes">Groceries</string>
+    <string name="aceites">Oils</string>
+    <string name="agua">Water</string>
+    <string name="bebidas">Drinks</string>
+    <string name="alcohol">Alcoholic drinks</string>
+    <string name="cafe">Coffee, tea</string>
+    <string name="lacteos">Dairy, Delicatessen</string>
+    <string name="pan">Bread</string>
+    <string name="reposteria">Cake shop</string>
+    <string name="dulces">Sweets</string>
+    <string name="carnes">Meats</string>
+    <string name="pescados">Fish</string>
+    <string name="congelados">Frozen</string>
+    <string name="conservados">Preserved</string>
+    <string name="enlatados">Canned</string>
+    <string name="salsas">Sauces</string>
+    <string name="frutas">Fruits</string>
+    <string name="vegetales">Vegetables</string>
+    <string name="preparada">Prepared food</string>
+    <string name="mascotas">Pets</string>
+    <string name="higiene">Hygiene</string>
+    <string name="hogar">Home</string>
+    <string name="limpieza">Cleaning</string>
+    <string name="libros">Books</string>
+    <string name="ropa">Clothes</string>
+    <string name="bebes">Babies</string>
+    <string name="belleza">Beauty</string>
+    <string name="salud">Health</string>
+    <string name="vehiculos">Vehicles</string>
+    <string name="electrodomesticos">Home appliances</string>
+
+    <string name="usuario">User</string>
+    <string name="editardatosusuario">Edit account details</string>
+    <string name="pass">Password</string>
+    <string name="cambiopass">Change current password</string>
+    <string name="politica">Privacy Policy</string>
+    <string name="descrippolitica">This Privacy Policy explains how your personal data is collected and processed</string>
+    <string name="eliminarcuenta">Delete account</string>
+    <string name="seperderanlosdatos">All your account data will be lost</string>
+
+
+    <!--    para el menu lateral-->
+
+    <string name="listas">Lists</string>
+    <string name="amigos">Friends</string>
+    <string name="basura">Garbage</string>
+    <string name="invitaciones">Invitations</string>
+    <string name="ajustes">Settings</string>
+    <string name="salir">Sign off</string>
+    <string name="premium">PREMIUM</string>
+
+    <string name="abrir">Open</string>
+    <string name="cerrar">To close</string>
+
+    <!--    para menu de listas-->
+
+    <string name="seleccionar">Select all</string>
+    <string name="deseleccionar">Deselect all</string>
+
+    <string name="segurodeduplicar">The list will be duplicated</string>
+    <string name="listaduplicada">Duplicate list</string>
+    <string name="duplicar">Duplicate</string>
+    <string name="editar">Edit</string>
+    <string name="eliminar">Remove</string>
+
+    <string name="debesregistrarte">You must register</string>
+    <string name="desbesbody">To access this option</string>
+
+    <!--    Dialogs-->
+    <string name="segurodeeliminar">Are you sure to delete?</string>
+    <string name="si">YES</string>
+    <string name="no">NO</string>
+
+    <string name="cargando">Loading...</string>
+
+    <string name="nombredelalista">List name</string>
+    <string name="cancelar">Cancel</string>
+
+</resources>

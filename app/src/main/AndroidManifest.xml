@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.rrvq.listacompras">
+
+    <uses-permission android:name="com.android.vending.BILLING" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+
+        <activity android:name=".MainActivity_Politicas"
+            android:parentActivityName=".Ajustes.MainActivity_Ajustes"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Ajustes.MainActivity_RecuperarPass"
+            android:parentActivityName=".Ajustes.MainActivity_Ajustes"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Ajustes.MainActivity_UsuarioEdit"
+            android:parentActivityName=".Ajustes.MainActivity_Ajustes"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Ajustes.MainActivity_Ajustes"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".AmigosDraw.MainActivity_AmigosDraw"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Amigos.MainActivity_Amigos"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".productos.ActivityProductos"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".sesion.Recuperar"
+            android:parentActivityName=".sesion.Login"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".sesion.Registrar"
+            android:parentActivityName=".sesion.Login"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".sesion.Login"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SplashScream"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait" />
+        <!--
+ Sample AdMob App ID: ca-app-pub-3940256099942544~3347511713
+         este es mio ca-app-pub-3019606122027900~8507353552
+        -->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-3019606122027900~8507353552" />
+    </application>
+
+</manifest>

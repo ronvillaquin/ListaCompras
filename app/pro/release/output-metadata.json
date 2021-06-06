@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "artifactType": {
+    "type": "APK",
+    "kind": "Directory"
+  },
+  "applicationId": "com.rrvq.listacompras.pro",
+  "variantName": "processProReleaseResources",
+  "elements": [
+    {
+      "type": "SINGLE",
+      "filters": [],
+      "versionCode": 15,
+      "versionName": "2.2-pro",
+      "outputFile": "app-pro-release.apk"
+    }
+  ]
+}

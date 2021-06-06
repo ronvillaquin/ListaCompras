@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="0dp"
+        app:cardElevation="5dp">
+
+
+    <LinearLayout
+        android:id="@+id/linearC"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="10dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+    <!--<CheckBox
+        android:id="@+id/Checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:enabled="false"/>-->
+
+        <ImageView
+            android:id="@+id/ivCheck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_casilla_check_24"
+            android:layout_marginHorizontal="10dp"
+            android:contentDescription="@string/descripcion"/>
+
+    <ImageView
+        android:id="@+id/imgIcono"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/salir24"
+        android:contentDescription="@string/descripcion"/>
+
+    <TextView
+        android:id="@+id/tvnombreProducto"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/prueba"
+        android:padding="20dp"/>
+
+
+    <TextView
+        android:id="@+id/tvcantidadProducto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="@string/cero"/>
+
+    <LinearLayout
+        android:layout_width="0.5dp"
+        android:layout_height="match_parent"
+        android:background="@color/colorGrisOscuro"
+        android:paddingHorizontal="5dp"/>
+
+    <TextView
+        android:id="@+id/tvprecioProducto"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="@string/cerodolar"/>
+
+        <ImageButton
+            android:id="@+id/ibmore"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_more_vert_black_24dp"
+            android:background="?attr/selectableItemBackground"
+            android:padding="5dp"
+            android:contentDescription="@string/descripcion"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearDivisor"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/colorGrisClaro"
+        android:paddingHorizontal="5dp"
+        android:orientation="horizontal"/>
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>
