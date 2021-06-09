@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context="com.rrvq.listacompras.productos.ActivityProductos">
 
-
 <!--    PRIMERA VISTA MOSTRAR ARTICULOS -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/vista1"
