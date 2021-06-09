@@ -158,7 +158,24 @@
 
         </com.google.android.material.card.MaterialCardView>
 
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabChecks"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardView2" />
 
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPagerChecks"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tabChecks" />
+
+
+<!--        esto deberia ir en el fragment para que muestre el recyclert-->
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/refreshRecycler"
             android:layout_width="match_parent"
@@ -167,7 +184,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView2">
+            app:layout_constraintTop_toBottomOf="@+id/tabChecks">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerview"
