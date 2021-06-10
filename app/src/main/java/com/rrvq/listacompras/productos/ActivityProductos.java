@@ -1,5 +1,6 @@
 package com.rrvq.listacompras.productos;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -8,6 +9,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -51,6 +53,8 @@ import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.rrvq.listacompras.AdminSQLiteOpenHelper;
@@ -120,6 +124,10 @@ public class ActivityProductos extends AppCompatActivity {
     String nombre, apellido, id_usuario, editable;
 
     InterstitialAd mInterstitialAd;
+
+    ViewPageAdapter mPageAdapter;
+    ViewPager2 viewPagerChecks;
+    TabLayout tabLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -252,6 +260,31 @@ public class ActivityProductos extends AppCompatActivity {
         linearImgAdd = findViewById(R.id.linearImgAdd);
 
         mAdView = findViewById(R.id.adView);
+
+        // para crear la vista de tabs y pasar parametos a viewpageadapter
+        //se llama al metodo publico mediante addFragment y se le pasa o agrega cada array
+        tabLayout = findViewById(R.id.tabChecks);
+        viewPagerChecks = findViewById(R.id.viewPagerChecks);
+
+        mPageAdapter = new ViewPageAdapter(getSupportFragmentManager(), getLifecycle());
+        viewPagerChecks.setAdapter(mPageAdapter);
+
+        new TabLayoutMediator(tabLayout, viewPagerChecks, new TabLayoutMediator.TabConfigurationStrategy() {
+            @Override
+            public void onConfigureTab(@NonNull  TabLayout.Tab tab, int i) {
+
+                switch (i){
+                    case 0:
+                        tab.setIcon(R.drawable.ic_casilla_check_24);
+                        break;
+                    case 1:
+                        tab.setIcon(R.drawable.ic_check_24);
+                        break;
+                }
+            }
+        }).attach();
+
+
     }
 
     //******************************** pantalla 1 mostrar productos *************************//
