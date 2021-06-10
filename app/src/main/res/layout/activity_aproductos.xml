@@ -162,6 +162,9 @@
             android:id="@+id/tabChecks"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            app:tabIndicatorColor="@color/colorBlanco"
+            app:tabSelectedTextColor="@color/colorBlanco"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardView2" />
 
