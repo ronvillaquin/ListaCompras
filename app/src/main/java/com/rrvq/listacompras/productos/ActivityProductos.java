@@ -328,7 +328,7 @@ public class ActivityProductos extends AppCompatActivity {
 
 
                 obtenerArticulos();
-                adapterProductos.notifyDataSetChanged();
+//                adapterProductos.notifyDataSetChanged();
 
                 //swipe tiempo de demora del circulo pprogreso
 //                swipeRefreshLayout.setRefreshing(false);
@@ -476,6 +476,7 @@ public class ActivityProductos extends AppCompatActivity {
 
     }
 
+
     public void obtenerArticulos(){
 
         // enviar el id del usuario para recuperar solo sus listas y las listas que le comparten
@@ -489,9 +490,6 @@ public class ActivityProductos extends AppCompatActivity {
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET,url, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-
-                mostrarFrgments(response.toString());
-
 
 //                String resString = response.toString();
 //                resString = response.toString();
@@ -554,6 +552,8 @@ public class ActivityProductos extends AppCompatActivity {
                 tvTotalTotal.setText("$" + formato.format(totalTotal));
 
 //                setRecyclerView();
+
+                mostrarFrgments(response.toString());
 
 
 

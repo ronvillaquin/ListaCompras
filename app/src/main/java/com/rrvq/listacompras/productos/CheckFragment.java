@@ -40,7 +40,7 @@ public class CheckFragment extends Fragment {
 
     View view;
     RecyclerView recyclerViewCheck;
-    SwipeRefreshLayout swipeRefreshLayout;
+//    SwipeRefreshLayout swipeRefreshLayout;
     ArrayList<Productos> data = new ArrayList<>();
     AdapterProductos adapterProductos;
     String responseDATA;
@@ -65,7 +65,7 @@ public class CheckFragment extends Fragment {
         responseDATA = this.getArguments().getString(Constantes.KEY_FRAGMET);
 
 
-        refrescarRecycler();
+//        refrescarRecycler();
         obtenerArticulos();
 
 
@@ -75,14 +75,14 @@ public class CheckFragment extends Fragment {
     private void casting(){
 
         recyclerViewCheck = view.findViewById(R.id.recyclerviewCheck);
-        swipeRefreshLayout = view.findViewById(R.id.refreshRecycler);
+//        swipeRefreshLayout = view.findViewById(R.id.refreshRecycler);
 
        activityProductos = new ActivityProductos();
 
     }
 
 
-    public void refrescarRecycler() {
+   /* public void refrescarRecycler() {
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -97,7 +97,7 @@ public class CheckFragment extends Fragment {
 
             }
         });
-    }
+    }*/
 
 
     public void setRecyclerView(){
@@ -267,8 +267,6 @@ public class CheckFragment extends Fragment {
 
                 } catch (JSONException e) {
                     e.printStackTrace();
-//
-                    swipeRefreshLayout.setRefreshing(false);
                 }
 
 
