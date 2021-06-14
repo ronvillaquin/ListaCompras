@@ -262,7 +262,7 @@ public class ActivityProductos extends AppCompatActivity {
 
     private void castinView() {
 
-        recyclerView = findViewById(R.id.recyclerview);
+//        recyclerView = findViewById(R.id.recyclerview);
         swipeRefreshLayout = findViewById(R.id.refreshRecycler);
         recyclerViewIconos = findViewById(R.id.recyclerviewIconos);
 
