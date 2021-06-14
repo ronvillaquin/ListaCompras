@@ -574,7 +574,7 @@ public class ActivityProductos extends AppCompatActivity {
         requestQueue.add(jsonArrayRequest);
     }
 
-    private void editarCheck(final String id_art, final String check) {
+    public void editarCheck(final String id_art, final String check) {
 
         String url = getResources().getString(R.string.urleditarCheck);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
@@ -791,7 +791,7 @@ public class ActivityProductos extends AppCompatActivity {
         });
     }
 
-    private void editarArticulo(String idP, String nombreP, String precioP, String cantidadP, String notaP, String iconoP) {
+    public void editarArticulo(String idP, String nombreP, String precioP, String cantidadP, String notaP, String iconoP) {
 
         Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.mostrar);
         vista2.startAnimation(animation);
