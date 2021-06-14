@@ -4,8 +4,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".productos.CheckFragment"
+    android:orientation="vertical"
     android:background="@color/colorRojo">
 
-   
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/refreshRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerviewCheck"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 
 </FrameLayout>

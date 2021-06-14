@@ -4,7 +4,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".productos.NoCheckFragment"
-    android:background="@color/colorNegro">
+    android:orientation="vertical"
+    android:background="@color/colorPrimary">
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/refreshRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerviewCheckNoCheck"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
 </FrameLayout>

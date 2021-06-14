@@ -204,6 +204,7 @@
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/refreshRecycler"
             android:layout_width="match_parent"
+            android:visibility="gone"
             android:layout_height="0dp"
             android:layout_marginTop="10dp"
             app:layout_constraintBottom_toBottomOf="parent"

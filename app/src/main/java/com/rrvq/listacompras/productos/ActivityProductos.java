@@ -5,6 +5,9 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -129,6 +132,7 @@ public class ActivityProductos extends AppCompatActivity {
     ViewPager2 viewPagerChecks;
     TabLayout tabLayout;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -211,6 +215,37 @@ public class ActivityProductos extends AppCompatActivity {
 
     }
 
+    public void mostrarFrgments(String responseDATA){
+        // para crear la vista de tabs y pasar parametos a viewpageadapter
+        //se llama al metodo publico mediante addFragment y se le pasa o agrega cada array
+        tabLayout = findViewById(R.id.tabChecks);
+        viewPagerChecks = findViewById(R.id.viewPagerChecks);
+
+        mPageAdapter = new ViewPageAdapter(responseDATA, getSupportFragmentManager(), getLifecycle());
+        viewPagerChecks.setAdapter(mPageAdapter);
+
+        new TabLayoutMediator(tabLayout, viewPagerChecks, new TabLayoutMediator.TabConfigurationStrategy() {
+            @Override
+            public void onConfigureTab(@NonNull  TabLayout.Tab tab, int i) {
+
+                switch (i){
+                    case 0:
+//                        tab.setText("Check");
+                        tab.setIcon(R.drawable.ic_casilla_check_24);
+
+                        break;
+                    case 1:
+//                        tab.setText("No Check");
+                        tab.setIcon(R.drawable.ic_check_24);
+
+
+                        break;
+                }
+            }
+        }).attach();
+    }
+
+
     public void datosSqlite(){
         //Conexion a la base de datos SQLITE
         AdminSQLiteOpenHelper adminDB = new AdminSQLiteOpenHelper(this, "BDListas", null, 1);
@@ -260,30 +295,6 @@ public class ActivityProductos extends AppCompatActivity {
         linearImgAdd = findViewById(R.id.linearImgAdd);
 
         mAdView = findViewById(R.id.adView);
-
-        // para crear la vista de tabs y pasar parametos a viewpageadapter
-        //se llama al metodo publico mediante addFragment y se le pasa o agrega cada array
-        tabLayout = findViewById(R.id.tabChecks);
-        viewPagerChecks = findViewById(R.id.viewPagerChecks);
-
-        mPageAdapter = new ViewPageAdapter(getSupportFragmentManager(), getLifecycle());
-        viewPagerChecks.setAdapter(mPageAdapter);
-
-        new TabLayoutMediator(tabLayout, viewPagerChecks, new TabLayoutMediator.TabConfigurationStrategy() {
-            @Override
-            public void onConfigureTab(@NonNull  TabLayout.Tab tab, int i) {
-
-                switch (i){
-                    case 0:
-                        tab.setIcon(R.drawable.ic_casilla_check_24);
-                        break;
-                    case 1:
-                        tab.setIcon(R.drawable.ic_check_24);
-                        break;
-                }
-            }
-        }).attach();
-
 
     }
 
@@ -353,9 +364,6 @@ public class ActivityProductos extends AppCompatActivity {
     }
 
     public void setRecyclerView(){
-        //----------------para el recyclervie
-        /*data.add(new Listas("1", "Casa", "5/8", "30"));
-        data.add(new Listas("2", "1", "5/8", "10"));*/
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapterProductos = new AdapterProductos(this, data);
@@ -464,6 +472,8 @@ public class ActivityProductos extends AppCompatActivity {
 
 
         progressDialog.dismiss();
+
+
     }
 
     public void obtenerArticulos(){
@@ -480,7 +490,11 @@ public class ActivityProductos extends AppCompatActivity {
             @Override
             public void onResponse(JSONArray response) {
 
+                mostrarFrgments(response.toString());
+
+
 //                String resString = response.toString();
+//                resString = response.toString();
 
                 JSONObject jsonObject = null;
                 data.clear();
@@ -618,6 +632,8 @@ public class ActivityProductos extends AppCompatActivity {
                 tvTotalTotal.setText("$" + formato.format(totalTotal));
 
                 setRecyclerView();
+
+
 
             }
         }, new Response.ErrorListener() {
