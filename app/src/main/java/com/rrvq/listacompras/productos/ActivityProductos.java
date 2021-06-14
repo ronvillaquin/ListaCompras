@@ -497,7 +497,7 @@ public class ActivityProductos extends AppCompatActivity {
 //                resString = response.toString();
 
                 JSONObject jsonObject = null;
-                data.clear();
+//                data.clear();
 
                 tvtotalMarcado.setText("$0");
                 tvTotalSinMarcar.setText("$0");
@@ -520,30 +520,10 @@ public class ActivityProductos extends AppCompatActivity {
 
                         } else {
 
-//                            int id = getResources().getIdentifier(numero[i], "drawable", getPackageName());
-                            int img = getResources().getIdentifier(jsonObject.getString("icono_art"), "drawable", getPackageName());
-                            String imgs = String.valueOf(img);
-
-
-                            if (jsonObject.getString("check_art").equalsIgnoreCase("no")) {
-                                data.add(new Productos(
-                                        jsonObject.getString("id_articulo"),
-                                        jsonObject.getString("nombre_art"),
-                                        jsonObject.getString("precio_art"),
-                                        jsonObject.getString("cantidad_art"),
-                                        jsonObject.getString("nota_art"),
-                                        imgs,
-                                        jsonObject.getString("icono_art"),
-                                        jsonObject.getString("check_art"),
-                                        jsonObject.getString("id_lista"),
-                                        jsonObject.getString("id_usuario"),
-                                        jsonObject.getString("editable")
-                                ));
-
                                 editable = jsonObject.getString("editable");
 
                                 totalSinMarcar = totalSinMarcar + Float.parseFloat(jsonObject.getString("precio_art"));
-                            }
+                            totalMarcado = totalMarcado + Float.parseFloat(jsonObject.getString("precio_art"));
 
                             linearImgAdd.setVisibility(View.INVISIBLE);
 
@@ -560,64 +540,6 @@ public class ActivityProductos extends AppCompatActivity {
 
 
                 }
-
-                //*************para poner los que si estan check  ************//
-                for (int i = 0; i < response.length(); i++) {
-
-
-                    try {
-
-                        jsonObject = response.getJSONObject(i);
-
-                        if (jsonObject.getString("id_lista").equalsIgnoreCase("No hay registros")) {
-
-                            Toast.makeText(getApplicationContext(), getResources().getString(R.string.sinproductos), Toast.LENGTH_SHORT).show();
-                            linearImgAdd.setVisibility(View.VISIBLE);
-                            editable = jsonObject.getString("editable");
-
-                        } else {
-
-//                            int id = getResources().getIdentifier(numero[i], "drawable", getPackageName());
-                            int img = getResources().getIdentifier(jsonObject.getString("icono_art"), "drawable", getPackageName());
-                            String imgs = String.valueOf(img);
-
-
-                            if (jsonObject.getString("check_art").equalsIgnoreCase("si")) {
-                                data.add(new Productos(
-                                        jsonObject.getString("id_articulo"),
-                                        jsonObject.getString("nombre_art"),
-                                        jsonObject.getString("precio_art"),
-                                        jsonObject.getString("cantidad_art"),
-                                        jsonObject.getString("nota_art"),
-                                        imgs,
-                                        jsonObject.getString("icono_art"),
-                                        jsonObject.getString("check_art"),
-                                        jsonObject.getString("id_lista"),
-                                        jsonObject.getString("id_usuario"),
-                                        jsonObject.getString("editable")
-                                ));
-
-                                editable = jsonObject.getString("editable");
-
-                                totalMarcado = totalMarcado + Float.parseFloat(jsonObject.getString("precio_art"));
-                            }
-
-                            linearImgAdd.setVisibility(View.INVISIBLE);
-
-                        }
-
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-//                        Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-//                        Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_LONG).show();
-                        progressDialog.dismiss();
-                        swipeRefreshLayout.setRefreshing(false);
-                    }
-
-
-                }
-
 
 
                 progressDialog.dismiss();
@@ -631,7 +553,7 @@ public class ActivityProductos extends AppCompatActivity {
                 tvTotalSinMarcar.setText("$" + formato.format(totalSinMarcar));
                 tvTotalTotal.setText("$" + formato.format(totalTotal));
 
-                setRecyclerView();
+//                setRecyclerView();
 
 
 
