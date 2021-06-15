@@ -6,12 +6,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -32,19 +32,19 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.rrvq.listacompras.AdminSQLiteOpenHelper;
-import com.rrvq.listacompras.MainActivity;
 import com.rrvq.listacompras.R;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class AdapterProductos extends RecyclerView.Adapter<AdapterProductos.ViewHolder> implements View.OnClickListener {
 
-    private LayoutInflater layoutInflater;
-    private List<Productos> data;
-    private Context context;
+    private final LayoutInflater layoutInflater;
+    private final List<Productos> data;
+    private final Context context;
 
     private ProgressDialog progressDialog;
 
@@ -88,13 +88,17 @@ public class AdapterProductos extends RecyclerView.Adapter<AdapterProductos.View
 
         if (productos.getCheckP().equals("no")) {
             holder.linearC.setBackgroundResource(android.R.color.transparent);
-            holder.ivCheck.setImageResource(R.drawable.ic_casilla_check_24);
+            holder.linearDivisor.setBackgroundResource(R.color.transparente);
+
+            holder.checkBox.setChecked(false);
+//            holder.ivCheck.setImageResource(R.drawable.ic_casilla_check_24);
         } else if (productos.getCheckP().equals("si")) {
             holder.linearDivisor.setBackgroundResource(R.color.transparente);
-            holder.linearC.setBackgroundResource(R.color.sombreproductoCheck);
-            holder.ivCheck.setImageResource(R.drawable.ic_check_24);
-            holder.cardView.setElevation(0);
-            holder.cardView.setRadius(0);
+            holder.checkBox.setChecked(true);
+//            holder.linearC.setBackgroundResource(R.color.sombreproductoCheck);
+//            holder.ivCheck.setImageResource(R.drawable.ic_check_24);
+//            holder.cardView.setElevation(0);
+//            holder.cardView.setRadius(0);
         }
 
         if (!productos.getId_usuarioCreador().equals(id_usuario)){
@@ -198,25 +202,23 @@ public class AdapterProductos extends RecyclerView.Adapter<AdapterProductos.View
             }
         });
 
-
-        holder.ivCheck.setOnClickListener(new View.OnClickListener() {
+        holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View v) {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-                if (productos.getCheckP().equals("si")){
+                if (isChecked){
 
                     editarCheck(productos.getIdProducto(), "no", position);
 
-                }
-                else if (productos.getCheckP().equals("no")){
+                }else {
 
                     editarCheck(productos.getIdProducto(), "si", position);
 
                 }
 
-
             }
         });
+
 
 
 
@@ -247,12 +249,13 @@ public class AdapterProductos extends RecyclerView.Adapter<AdapterProductos.View
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
 //        CheckBox checkBox;
-        ImageView ivCheck;
+//        ImageView ivCheck;
         ImageView imgIcono;
         ImageButton ibmore;
         TextView tvnombreP, tvcantidadP, tvprecioP;
         LinearLayout linearC, linearDivisor;
         CardView cardView;
+        CheckBox checkBox;
 
         //para el click largo falta
 //        View mView;
@@ -261,7 +264,7 @@ public class AdapterProductos extends RecyclerView.Adapter<AdapterProductos.View
             super(itemView);
 
 //            checkBox = itemView.findViewById(R.id.Checkbox);
-            ivCheck = itemView.findViewById(R.id.ivCheck);
+//            ivCheck = itemView.findViewById(R.id.ivCheck);
             imgIcono = itemView.findViewById(R.id.imgIcono);
             tvnombreP = itemView.findViewById(R.id.tvnombreProducto);
             tvnombreP = itemView.findViewById(R.id.tvnombreProducto);
@@ -271,6 +274,8 @@ public class AdapterProductos extends RecyclerView.Adapter<AdapterProductos.View
             linearDivisor = itemView.findViewById(R.id.linearDivisor);
             cardView = itemView.findViewById(R.id.cardView);
             ibmore = itemView.findViewById(R.id.ibmore);
+            checkBox = itemView.findViewById(R.id.checkbox);
+
 
             //para click largo falta
 //            mView = itemView;
@@ -290,6 +295,7 @@ public class AdapterProductos extends RecyclerView.Adapter<AdapterProductos.View
     }
 
 
+
     public void editarCheck(final String id_art, final String check, final int position) {
 
         String url = context.getResources().getString(R.string.urleditarCheck);
@@ -303,6 +309,7 @@ public class AdapterProductos extends RecyclerView.Adapter<AdapterProductos.View
 //                    obtenerArticulos();
                     data.remove(position);
                     notifyDataSetChanged();
+
 
                 } else {
 

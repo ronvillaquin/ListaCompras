@@ -30,7 +30,7 @@
         android:padding="10dp"
         android:enabled="false"/>-->
 
-        <ImageView
+       <!-- <ImageView
             android:id="@+id/ivCheck"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -38,7 +38,13 @@
             android:src="@drawable/ic_casilla_check_24"
             android:layout_marginHorizontal="10dp"
             android:contentDescription="@string/descripcion"
-            android:background="?selectableItemBackground"/>
+            android:background="?selectableItemBackground"/>-->
+
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:id="@+id/checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"/>
 
     <ImageView
         android:id="@+id/imgIcono"
