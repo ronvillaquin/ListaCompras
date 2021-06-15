@@ -18,6 +18,8 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase baseDeDatos) {
 
         baseDeDatos.execSQL("CREATE TABLE sesion(id_usuario text, email_usu text, nombre_usu text, apellido_usu text)");
+        baseDeDatos.execSQL("CREATE TABLE pasarValores(idProducto text, nombreP text, precioP text, cantidadP text," +
+                "notaP text, iconoP text, iconoPString text, checkP text, idLista text, id_usuarioCreador text, editable text)");
 
     }
 

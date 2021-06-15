@@ -32,14 +32,14 @@ public class ViewPageAdapter extends FragmentStateAdapter {
             case 0:
 
                 bundle.putString(Constantes.KEY_FRAGMET, responseDATA);
-                fragment = new CheckFragment();
+                fragment = new NoCheckFragment();
 
                 fragment.setArguments(bundle);
                 break;
             case 1:
 
                 bundle.putString(Constantes.KEY_FRAGMET, responseDATA);
-                fragment = new NoCheckFragment();
+                fragment = new CheckFragment();
 
                 fragment.setArguments(bundle);
                 break;

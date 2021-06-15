@@ -1,6 +1,8 @@
 package com.rrvq.listacompras.productos;
 
 import android.content.DialogInterface;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
@@ -15,13 +17,10 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.rrvq.listacompras.AdminSQLiteOpenHelper;
 import com.rrvq.listacompras.Constantes;
 import com.rrvq.listacompras.R;
 
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -40,8 +39,6 @@ public class CheckFragment extends Fragment {
     ActivityProductos activityProductos;
     String icono_art = "abarrotes";
 
-    EventBus eventBus = EventBus.getDefault();
-
     public CheckFragment() {
         // Required empty public constructor
     }
@@ -56,8 +53,6 @@ public class CheckFragment extends Fragment {
 
         responseDATA = this.getArguments().getString(Constantes.KEY_FRAGMET);
 
-
-//        refrescarRecycler();
         obtenerArticulos();
 
 
@@ -237,7 +232,7 @@ public class CheckFragment extends Fragment {
                         String imgs = String.valueOf(img);
 
 
-                        if (jsonObject.getString("check_art").equalsIgnoreCase("no")) {
+                        if (jsonObject.getString("check_art").equalsIgnoreCase("si")) {
                             data.add(new Productos(
                                     jsonObject.getString("id_articulo"),
                                     jsonObject.getString("nombre_art"),
@@ -277,38 +272,50 @@ public class CheckFragment extends Fragment {
 
     }
 
-    public void agregaItemRecycler(String idProducto,String nombreP, String precioP, String cantidadP, String notaP,
-            String iconoP, String iconoPString, String checkP, String idLista, String id_usuarioCreador, String editable){
-
-        data.add(new Productos(idProducto,nombreP,precioP,cantidadP,
-                notaP,iconoP,iconoPString,checkP,idLista,
-                id_usuarioCreador,editable));
-
-    }
-
-/*
     @Override
-    public void onStart() {
-        super.onStart();
-        eventBus.register(this);
+    public void onResume() {
+        super.onResume();
+        Toast.makeText(getContext(), "acaba de iniciar CHECHK", Toast.LENGTH_SHORT).show();
+        agregaritemDATA();
+    }
+
+
+    private void agregaritemDATA() {
+
+        //Conexion a la base de datos SQLITE
+        AdminSQLiteOpenHelper adminDB = new AdminSQLiteOpenHelper(getContext(), "BDListas", null, 1);
+        SQLiteDatabase baseDeDatos = adminDB.getWritableDatabase();
+
+        Cursor fila = baseDeDatos.rawQuery("SELECT * FROM pasarValores", null);
+
+        if (fila.moveToFirst()){
+            do {
+                if (fila.getString(7).equals("si")){
+
+                    data.add(new Productos(fila.getString(0),fila.getString(1),fila.getString(2),
+                            fila.getString(3),fila.getString(4),fila.getString(5),
+                            fila.getString(6),fila.getString(7),fila.getString(8),
+                            fila.getString(9),fila.getString(10)));
+                }
+            }while (fila.moveToNext());
+
+            eliminarDatosSqlite();
+        }
+
+        adapterProductos.notifyDataSetChanged();
 
     }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        eventBus.unregister(this);
+    private void eliminarDatosSqlite(){
+
+        //Conexion a la base de datos SQLITE
+        AdminSQLiteOpenHelper adminDB = new AdminSQLiteOpenHelper(getContext(), "BDListas", null, 1);
+        SQLiteDatabase baseDeDatos = adminDB.getWritableDatabase();
+
+
+        baseDeDatos.delete("pasarValores",null,null);
+        baseDeDatos.close();
+
     }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void ejecutarComunicacion(ComunicacionFrag c){
-
-        agregaItemRecycler(c.idProducto, c.nombreP, c.precioP, c.cantidadP, c.notaP, c.iconoP, c.iconoPString,
-                c.checkP, c.idLista, c.id_usuarioCreador, c.editable);
-
-    }*/
-
-
-
 
 }

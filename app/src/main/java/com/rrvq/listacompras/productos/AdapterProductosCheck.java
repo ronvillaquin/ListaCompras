@@ -31,28 +31,22 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.rrvq.listacompras.AdminSQLiteOpenHelper;
 import com.rrvq.listacompras.R;
 
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class AdapterProductos extends RecyclerView.Adapter<AdapterProductos.ViewHolder> implements View.OnClickListener {
+public class AdapterProductosCheck extends RecyclerView.Adapter<AdapterProductosCheck.ViewHolder> implements View.OnClickListener {
 
     private final LayoutInflater layoutInflater;
-    private final List<Productos> data;
+    private final List<ProductosCheck> data;
     private final Context context;
 
-    private Productos productosChange;
+    private ProductosCheck productosChange;
     private ViewHolder vholder;
 
     private ProgressDialog progressDialog;
@@ -62,7 +56,7 @@ public class AdapterProductos extends RecyclerView.Adapter<AdapterProductos.View
 
     private View.OnClickListener listener;
 
-    public AdapterProductos(Context context, List<Productos> data){
+    public AdapterProductosCheck(Context context, List<ProductosCheck> data){
         this.layoutInflater = LayoutInflater.from(context);
         this.data = data;
         this.context = context;
@@ -83,7 +77,7 @@ public class AdapterProductos extends RecyclerView.Adapter<AdapterProductos.View
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
 
         datosSqlite();
-        final Productos productos = data.get(position);
+        final ProductosCheck productos = data.get(position);
         vholder = holder;
 
         //para no reciclar las vistas y que no se cambien de posicion los elementos
@@ -344,7 +338,6 @@ public class AdapterProductos extends RecyclerView.Adapter<AdapterProductos.View
             public void onResponse(String response) {
 
                 if (response.equalsIgnoreCase("Editado")) {
-
 
                     productosChange = data.get(position);
 
