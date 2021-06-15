@@ -243,6 +243,8 @@ public class ActivityProductos extends AppCompatActivity {
                 }
             }
         }).attach();
+
+
     }
 
 
@@ -520,8 +522,15 @@ public class ActivityProductos extends AppCompatActivity {
 
                                 editable = jsonObject.getString("editable");
 
-                                totalSinMarcar = totalSinMarcar + Float.parseFloat(jsonObject.getString("precio_art"));
-                            totalMarcado = totalMarcado + Float.parseFloat(jsonObject.getString("precio_art"));
+
+                                if (jsonObject.getString("check_art").equals("no")){
+                                    totalSinMarcar = totalSinMarcar + Float.parseFloat(jsonObject.getString("precio_art"));
+
+                                }
+                                if (jsonObject.getString("check_art").equals("si")){
+                                    totalMarcado = totalMarcado + Float.parseFloat(jsonObject.getString("precio_art"));
+
+                                }
 
                             linearImgAdd.setVisibility(View.INVISIBLE);
 
@@ -1030,6 +1039,7 @@ public class ActivityProductos extends AppCompatActivity {
         requestQueue.add(stringRequest);
 
     }
+
 
 
     @Override

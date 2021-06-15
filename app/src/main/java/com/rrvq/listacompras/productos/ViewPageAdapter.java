@@ -13,7 +13,7 @@ import com.rrvq.listacompras.Constantes;
 
 public class ViewPageAdapter extends FragmentStateAdapter {
 
-    private String responseDATA;
+    private final String responseDATA;
 
     public ViewPageAdapter(String responseDATA, @NonNull  FragmentManager fragmentManager, @NonNull  Lifecycle lifecycle) {
         super(fragmentManager, lifecycle);

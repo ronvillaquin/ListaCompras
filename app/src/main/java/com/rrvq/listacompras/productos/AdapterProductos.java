@@ -25,17 +25,25 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.rrvq.listacompras.AdminSQLiteOpenHelper;
 import com.rrvq.listacompras.R;
 
 
+import org.greenrobot.eventbus.EventBus;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,9 +54,14 @@ public class AdapterProductos extends RecyclerView.Adapter<AdapterProductos.View
     private final List<Productos> data;
     private final Context context;
 
+    private Productos productosChange;
+
     private ProgressDialog progressDialog;
 
     private String id_usuario;
+
+    //para cmunicar fragments
+    private final EventBus eventBus = EventBus.getDefault();
 
     private View.OnClickListener listener;
 
@@ -74,6 +87,7 @@ public class AdapterProductos extends RecyclerView.Adapter<AdapterProductos.View
 
         datosSqlite();
         final Productos productos = data.get(position);
+        productosChange = data.get(position);
 
         //para no reciclar las vistas y que no se cambien de posicion los elementos
         //l desabilito
@@ -208,11 +222,11 @@ public class AdapterProductos extends RecyclerView.Adapter<AdapterProductos.View
 
                 if (isChecked){
 
-                    editarCheck(productos.getIdProducto(), "no", position);
+                    editarCheck(productos.getIdProducto(), "si", position);
 
                 }else {
 
-                    editarCheck(productos.getIdProducto(), "si", position);
+                    editarCheck(productos.getIdProducto(), "no", position);
 
                 }
 
@@ -305,10 +319,38 @@ public class AdapterProductos extends RecyclerView.Adapter<AdapterProductos.View
 
                 if (response.equalsIgnoreCase("Editado")) {
 
-
-//                    obtenerArticulos();
                     data.remove(position);
+//                    notifyDataSetChanged();
                     notifyDataSetChanged();
+
+
+
+                    if (check.equals("si")){
+
+                       /* eventBus.post(new ComunicacionFrag(productosChange.getIdProducto(), productosChange.getNombreP(), productosChange.getPrecioP(),
+                                productosChange.getCantidadP(),productosChange.getNotaP(),productosChange.getIconoP(),
+                                productosChange.getIconoPString(), check ,productosChange.getIdLista(),
+                                productosChange.getId_usuarioCreador(), productosChange.getEditable()));*/
+
+                        /*CheckFragment checkFragment = new CheckFragment();
+                        checkFragment.agregaItemRecycler(productosChange.getIdProducto(), productosChange.getNombreP(), productosChange.getPrecioP(),
+                                productosChange.getCantidadP(),productosChange.getNotaP(),productosChange.getIconoP(),
+                                productosChange.getIconoPString(), check ,productosChange.getIdLista(),
+                                productosChange.getId_usuarioCreador(), productosChange.getEditable());*/
+                    }
+                    else if (check.equals("no")){
+
+                       /* eventBus.post(new ComunicacionFrag(productosChange.getIdProducto(), productosChange.getNombreP(), productosChange.getPrecioP(),
+                                productosChange.getCantidadP(),productosChange.getNotaP(),productosChange.getIconoP(),
+                                productosChange.getIconoPString(), check ,productosChange.getIdLista(),
+                                productosChange.getId_usuarioCreador(), productosChange.getEditable()));*/
+
+                        /*NoCheckFragment noCheckFragment = new NoCheckFragment();
+                        noCheckFragment.agregaItemRecycler(productosChange.getIdProducto(), productosChange.getNombreP(), productosChange.getPrecioP(),
+                                productosChange.getCantidadP(),productosChange.getNotaP(),productosChange.getIconoP(),
+                                productosChange.getIconoPString(), check ,productosChange.getIdLista(),
+                                productosChange.getId_usuarioCreador(), productosChange.getEditable());*/
+                    }
 
 
                 } else {
@@ -342,9 +384,91 @@ public class AdapterProductos extends RecyclerView.Adapter<AdapterProductos.View
             }
         };
 
+        // para cuando hago peticiones con requesstring solamente ************
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                0,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(stringRequest);
 
+    }
+
+    public void obtenerArticulosChange(){
+
+        String url = context.getResources().getString(R.string.urlBuscarArticulo)+productosChange.getIdLista()+"&id_usu_share="+id_usuario+"";
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET,url, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+
+//                String resString = response.toString();
+//                resString = response.toString();
+
+                JSONObject jsonObject = null;
+                data.clear();
+
+
+                //*************para poner los que no estan check  ************//
+                for (int i = 0; i < response.length(); i++) {
+
+
+                    try {
+
+                        jsonObject = response.getJSONObject(i);
+
+                        if (jsonObject.getString("id_lista").equalsIgnoreCase("No hay registros")) {
+
+                            Toast.makeText(context, context.getResources().getString(R.string.sinproductos), Toast.LENGTH_SHORT).show();
+
+
+                        } else {
+
+                            int img = context.getResources().getIdentifier(jsonObject.getString("icono_art"), "drawable", context.getPackageName());
+                            String imgs = String.valueOf(img);
+
+                            data.add(new Productos(
+                                    jsonObject.getString("id_articulo"),
+                                    jsonObject.getString("nombre_art"),
+                                    jsonObject.getString("precio_art"),
+                                    jsonObject.getString("cantidad_art"),
+                                    jsonObject.getString("nota_art"),
+                                    imgs,
+                                    jsonObject.getString("icono_art"),
+                                    jsonObject.getString("check_art"),
+                                    jsonObject.getString("id_lista"),
+                                    jsonObject.getString("id_usuario"),
+                                    jsonObject.getString("editable")
+                            ));
+
+                        }
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+//                        Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_LONG).show();
+
+                    }
+
+
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                // esto se puede dar mensaje de error de conexion
+                Toast.makeText(context, context.getResources().getString(R.string.conexion), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(jsonArrayRequest);
     }
 
 

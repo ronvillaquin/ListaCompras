@@ -3,33 +3,25 @@ package com.rrvq.listacompras.productos;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.Volley;
 import com.google.android.material.textfield.TextInputEditText;
 import com.rrvq.listacompras.Constantes;
-import com.rrvq.listacompras.MainActivity;
 import com.rrvq.listacompras.R;
 
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -47,6 +39,8 @@ public class CheckFragment extends Fragment {
     String editable;
     ActivityProductos activityProductos;
     String icono_art = "abarrotes";
+
+    EventBus eventBus = EventBus.getDefault();
 
     public CheckFragment() {
         // Required empty public constructor
@@ -205,6 +199,8 @@ public class CheckFragment extends Fragment {
 
         recyclerViewCheck.setAdapter(adapterProductos);
 
+        adapterProductos.notifyDataSetChanged();
+
 
 //        progressDialog.dismiss();
 
@@ -280,6 +276,37 @@ public class CheckFragment extends Fragment {
         }
 
     }
+
+    public void agregaItemRecycler(String idProducto,String nombreP, String precioP, String cantidadP, String notaP,
+            String iconoP, String iconoPString, String checkP, String idLista, String id_usuarioCreador, String editable){
+
+        data.add(new Productos(idProducto,nombreP,precioP,cantidadP,
+                notaP,iconoP,iconoPString,checkP,idLista,
+                id_usuarioCreador,editable));
+
+    }
+
+/*
+    @Override
+    public void onStart() {
+        super.onStart();
+        eventBus.register(this);
+
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        eventBus.unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void ejecutarComunicacion(ComunicacionFrag c){
+
+        agregaItemRecycler(c.idProducto, c.nombreP, c.precioP, c.cantidadP, c.notaP, c.iconoP, c.iconoPString,
+                c.checkP, c.idLista, c.id_usuarioCreador, c.editable);
+
+    }*/
 
 
 
