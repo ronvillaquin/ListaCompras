@@ -12,6 +12,7 @@
     <color name="colorGrisClaro">#AAAAAA</color>
     <color name="colorGrisOscuro">#6F6F6F</color>
     <color name="colorGrisProducto">#CFD8DC</color>
+    <color name="sombreproductoCheck">#f5f5f5</color>
     <color name="colorHint">#CFD8DC</color>
 
     <color name="colorRojo">#C50909</color>

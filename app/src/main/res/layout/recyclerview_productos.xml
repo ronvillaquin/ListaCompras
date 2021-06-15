@@ -33,10 +33,12 @@
         <ImageView
             android:id="@+id/ivCheck"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginVertical="10dp"
             android:src="@drawable/ic_casilla_check_24"
             android:layout_marginHorizontal="10dp"
-            android:contentDescription="@string/descripcion"/>
+            android:contentDescription="@string/descripcion"
+            android:background="?selectableItemBackground"/>
 
     <ImageView
         android:id="@+id/imgIcono"

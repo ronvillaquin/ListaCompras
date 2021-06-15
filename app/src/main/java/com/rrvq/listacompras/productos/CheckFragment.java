@@ -60,8 +60,6 @@ public class CheckFragment extends Fragment {
 
         casting();
 
-        Toast.makeText(getContext(), "Hola prueba 1", Toast.LENGTH_SHORT).show();
-
         responseDATA = this.getArguments().getString(Constantes.KEY_FRAGMET);
 
 

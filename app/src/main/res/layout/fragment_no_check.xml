@@ -4,22 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".productos.NoCheckFragment"
-    android:orientation="vertical"
-    android:background="@color/colorPrimary">
+    android:orientation="vertical">
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/refreshRecycler"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerviewNOCheck"
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="10dp">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerviewCheckNoCheck"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-
-
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+        android:layout_height="match_parent"/>
 
 
 </FrameLayout>

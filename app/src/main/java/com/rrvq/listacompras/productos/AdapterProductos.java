@@ -91,7 +91,7 @@ public class AdapterProductos extends RecyclerView.Adapter<AdapterProductos.View
             holder.ivCheck.setImageResource(R.drawable.ic_casilla_check_24);
         } else if (productos.getCheckP().equals("si")) {
             holder.linearDivisor.setBackgroundResource(R.color.transparente);
-            holder.linearC.setBackgroundResource(R.color.colorGrisProducto);
+            holder.linearC.setBackgroundResource(R.color.sombreproductoCheck);
             holder.ivCheck.setImageResource(R.drawable.ic_check_24);
             holder.cardView.setElevation(0);
             holder.cardView.setRadius(0);
@@ -199,6 +199,28 @@ public class AdapterProductos extends RecyclerView.Adapter<AdapterProductos.View
         });
 
 
+        holder.ivCheck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (productos.getCheckP().equals("si")){
+
+                    editarCheck(productos.getIdProducto(), "no", position);
+
+                }
+                else if (productos.getCheckP().equals("no")){
+
+                    editarCheck(productos.getIdProducto(), "si", position);
+
+                }
+
+
+            }
+        });
+
+
+
+
     }
 
     @Override
@@ -265,6 +287,57 @@ public class AdapterProductos extends RecyclerView.Adapter<AdapterProductos.View
         if (fila.moveToFirst()) {
             id_usuario = fila.getString(0);
         }
+    }
+
+
+    public void editarCheck(final String id_art, final String check, final int position) {
+
+        String url = context.getResources().getString(R.string.urleditarCheck);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                if (response.equalsIgnoreCase("Editado")) {
+
+
+//                    obtenerArticulos();
+                    data.remove(position);
+                    notifyDataSetChanged();
+
+                } else {
+
+                    Toast.makeText(context, context.getResources().getString(R.string.error), Toast.LENGTH_SHORT).show();
+
+
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                Toast.makeText(context, context.getResources().getString(R.string.conexion), Toast.LENGTH_SHORT).show();
+
+
+            }
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+                Map<String, String> parametros = new HashMap<String, String>();
+
+                parametros.put("id_articulo", id_art);
+                parametros.put("check_art", check);
+
+
+                return parametros;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(stringRequest);
+
     }
 
 

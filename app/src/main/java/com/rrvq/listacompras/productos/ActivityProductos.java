@@ -793,7 +793,7 @@ public class ActivityProductos extends AppCompatActivity {
 
     public void editarArticulo(String idP, String nombreP, String precioP, String cantidadP, String notaP, String iconoP) {
 
-        Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.mostrar);
+        Animation animation = AnimationUtils.loadAnimation(this, R.anim.mostrar);
         vista2.startAnimation(animation);
 
         vista1.setVisibility(View.GONE);
