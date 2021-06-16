@@ -37,9 +37,9 @@
 
 
     <!--    Este es mi baner-->
-<!--    <string name="banner">ca-app-pub-3019606122027900/9370036752</string>-->
+    <!--    <string name="banner">ca-app-pub-3019606122027900/9370036752</string>-->
     <!--    este es prueba-->
-        <string name="banner">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="banner">ca-app-pub-3940256099942544/6300978111</string>
 
     <!--    Toast para los mensajes-->
 

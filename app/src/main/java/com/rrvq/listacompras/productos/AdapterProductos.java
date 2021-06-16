@@ -55,7 +55,6 @@ public class AdapterProductos extends RecyclerView.Adapter<AdapterProductos.View
 
     private String id_usuario;
 
-
     private View.OnClickListener listener;
 
     public AdapterProductos(Context context, List<Productos> data){
@@ -344,12 +343,14 @@ public class AdapterProductos extends RecyclerView.Adapter<AdapterProductos.View
                     productosChange = data.get(position);
 
 
+
                     guardaParametrosFrag(productosChange.getIdProducto(), productosChange.getNombreP(), productosChange.getPrecioP(),
                             productosChange.getCantidadP(),productosChange.getNotaP(),productosChange.getIconoP(),
                             productosChange.getIconoPString(),check,productosChange.getIdLista(),
                             productosChange.getId_usuarioCreador(),productosChange.getEditable());
 
-//                    data.remove(position);
+
+                    data.remove(position);
                     notifyDataSetChanged();
                     //para no pulsar repetidas veces el check
                     holder.checkBox.setEnabled(true);
