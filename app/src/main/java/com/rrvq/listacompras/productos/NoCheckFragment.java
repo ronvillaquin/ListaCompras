@@ -182,11 +182,6 @@ public class NoCheckFragment extends Fragment {
 
 
                     }
-                    else if (productos.getCheckP().equals("si")){
-
-                        activityProductos.editarCheck(productos.getIdProducto(), "no");
-
-                    }
                 }
                 else {
                     Toast.makeText(getContext(), getResources().getString(R.string.noautorizado), Toast.LENGTH_SHORT).show();
@@ -282,7 +277,7 @@ public class NoCheckFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        Toast.makeText(getContext(), "acaba de iniciar NO", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getContext(), "acaba de iniciar NO", Toast.LENGTH_SHORT).show();
         agregaritemDATA();
     }
 

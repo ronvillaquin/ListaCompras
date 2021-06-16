@@ -93,6 +93,7 @@ public class CheckFragment extends Fragment {
         adapterProductos = new AdapterProductos(getContext(), data);
 
 
+
         adapterProductos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,7 +107,7 @@ public class CheckFragment extends Fragment {
                             " ID: "+data.get(recyclerView.getChildAdapterPosition(v)).getIdProducto(), Toast.LENGTH_SHORT).show();*/
 
 
-                    if (productos.getCheckP().equals("no")){
+                    if (productos.getCheckP().equals("si")){
 
                         final AlertDialog.Builder dialogo = new AlertDialog.Builder(getContext());
 
@@ -176,11 +177,6 @@ public class CheckFragment extends Fragment {
 
 
 
-
-                    }
-                    else if (productos.getCheckP().equals("si")){
-
-                        activityProductos.editarCheck(productos.getIdProducto(), "no");
 
                     }
                 }
@@ -275,7 +271,7 @@ public class CheckFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        Toast.makeText(getContext(), "acaba de iniciar CHECHK", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getContext(), "acaba de iniciar CHECHK", Toast.LENGTH_SHORT).show();
         agregaritemDATA();
     }
 

@@ -81,11 +81,8 @@ public class ActivityProductos extends AppCompatActivity {
     Toolbar toolbar;
 
     // para el volley
-    RecyclerView recyclerView;
-    AdapterProductos adapterProductos;
     SwipeRefreshLayout swipeRefreshLayout;
     ProgressDialog progressDialog;
-    ArrayList<Productos> data = new ArrayList<>();
 
     // para los iconos precargados
     RecyclerView recyclerViewIconos;
@@ -365,118 +362,119 @@ public class ActivityProductos extends AppCompatActivity {
         });
     }
 
-    public void setRecyclerView(){
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapterProductos = new AdapterProductos(this, data);
-
-
-            adapterProductos.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    if (editable.equals("si")) {
-                        //para usar solo listas y referenciasr con get listas.getIdLista() recibo de listas
-                        final Productos productos = data.get(recyclerView.getChildAdapterPosition(v));
-
-                    /*Toast.makeText(getApplicationContext(), "Seleccion: "+
-                            data.get(recyclerView.getChildAdapterPosition(v)).getNombreP()+
-                            " ID: "+data.get(recyclerView.getChildAdapterPosition(v)).getIdProducto(), Toast.LENGTH_SHORT).show();*/
-
-
-                        if (productos.getCheckP().equals("no")){
-
-                            final AlertDialog.Builder dialogo = new AlertDialog.Builder(ActivityProductos.this);
-
-                            dialogo.setTitle(getResources().getString(R.string.articulo));
-        //                    dialogo.setCancelable(false);
-
-                            LayoutInflater inflater = ActivityProductos.this.getLayoutInflater();
-
-                            View dialogView = inflater.inflate(R.layout.dialog_producto, null);
-                            dialogo.setView(dialogView);
-
-                            TextInputEditText etnombreP, etcantidadP, etprecioP, etnotaP;
-                            ImageView ivI;
-
-                            etnombreP = dialogView.findViewById(R.id.etNombre);
-                            etcantidadP = dialogView.findViewById(R.id.etCantidad);
-                            etprecioP = dialogView.findViewById(R.id.etPrecio);
-                            etnotaP = dialogView.findViewById(R.id.etNota);
-                            ivI = dialogView.findViewById(R.id.ivIcono);
-
-                            etnombreP.setText(productos.getNombreP());
-                            etcantidadP.setText(productos.getCantidadP());
-                            etprecioP.setText(productos.getPrecioP());
-                            etnotaP.setText(productos.getNotaP());
-                            ivI.setImageResource(Integer.parseInt(productos.getIconoP()));
-
-                            //para el bootn aceptar del dialogo
-                            dialogo.setPositiveButton(getResources().getString(R.string.check), new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialogo, int id) {
-
-                                    //cuando se da check se envia a editar a check
-                                    editarCheck(productos.getIdProducto(), "si");
-
-                                }
-                            });
-        /*
-                            dialogo.setNegativeButton(getResources().getString(R.string.cancelar), new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialogo, int id) {
-                                    // accion si da cancelar que no haga nada
-                                    dialogo.cancel();
-                                }
-                            });*/
-
-                            dialogo.setNeutralButton(getResources().getString(R.string.editar), new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialogo, int id) {
-
-                                    dialogo.cancel();
-
-                                    String idP = productos.getIdProducto();
-                                    String nombreP = productos.getNombreP();
-                                    String precioP = productos.getPrecioP();
-                                    String cantidadP = productos.getCantidadP();
-                                    String notaP = productos.getNotaP();
-                                    String iconoP = productos.getIconoP();
-                                    // para tener el string del icono tambien
-                                    icono_art = productos.getIconoPString();
-
-                                    editarArticulo(idP, nombreP, precioP, cantidadP, notaP, iconoP);
-
-                                    obtenerIconos();
-
-                                }
-                            });
-
-
-                            dialogo.show();
-
-
-
-
-                        }
-                        else if (productos.getCheckP().equals("si")){
-
-                            editarCheck(productos.getIdProducto(), "no");
-
-                        }
-                    }
-                    else {
-                        Toast.makeText(getApplicationContext(), getResources().getString(R.string.noautorizado), Toast.LENGTH_SHORT).show();
-                    }
-
-                }
-            });
-
-
-        recyclerView.setAdapter(adapterProductos);
-
-
-        progressDialog.dismiss();
-
-
-    }
+//    Donde estaba el metodo del recyclerview del activity que se cambio a fragments
+//    public void setRecyclerView(){
+//
+//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+//        adapterProductos = new AdapterProductos(this, data);
+//
+//
+//            adapterProductos.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//
+//                    if (editable.equals("si")) {
+//                        //para usar solo listas y referenciasr con get listas.getIdLista() recibo de listas
+//                        final Productos productos = data.get(recyclerView.getChildAdapterPosition(v));
+//
+//                    /*Toast.makeText(getApplicationContext(), "Seleccion: "+
+//                            data.get(recyclerView.getChildAdapterPosition(v)).getNombreP()+
+//                            " ID: "+data.get(recyclerView.getChildAdapterPosition(v)).getIdProducto(), Toast.LENGTH_SHORT).show();*/
+//
+//
+//                        if (productos.getCheckP().equals("no")){
+//
+//                            final AlertDialog.Builder dialogo = new AlertDialog.Builder(ActivityProductos.this);
+//
+//                            dialogo.setTitle(getResources().getString(R.string.articulo));
+//        //                    dialogo.setCancelable(false);
+//
+//                            LayoutInflater inflater = ActivityProductos.this.getLayoutInflater();
+//
+//                            View dialogView = inflater.inflate(R.layout.dialog_producto, null);
+//                            dialogo.setView(dialogView);
+//
+//                            TextInputEditText etnombreP, etcantidadP, etprecioP, etnotaP;
+//                            ImageView ivI;
+//
+//                            etnombreP = dialogView.findViewById(R.id.etNombre);
+//                            etcantidadP = dialogView.findViewById(R.id.etCantidad);
+//                            etprecioP = dialogView.findViewById(R.id.etPrecio);
+//                            etnotaP = dialogView.findViewById(R.id.etNota);
+//                            ivI = dialogView.findViewById(R.id.ivIcono);
+//
+//                            etnombreP.setText(productos.getNombreP());
+//                            etcantidadP.setText(productos.getCantidadP());
+//                            etprecioP.setText(productos.getPrecioP());
+//                            etnotaP.setText(productos.getNotaP());
+//                            ivI.setImageResource(Integer.parseInt(productos.getIconoP()));
+//
+//                            //para el bootn aceptar del dialogo
+//                            dialogo.setPositiveButton(getResources().getString(R.string.check), new DialogInterface.OnClickListener() {
+//                                public void onClick(DialogInterface dialogo, int id) {
+//
+//                                    //cuando se da check se envia a editar a check
+//                                    editarCheck(productos.getIdProducto(), "si");
+//
+//                                }
+//                            });
+//        /*
+//                            dialogo.setNegativeButton(getResources().getString(R.string.cancelar), new DialogInterface.OnClickListener() {
+//                                public void onClick(DialogInterface dialogo, int id) {
+//                                    // accion si da cancelar que no haga nada
+//                                    dialogo.cancel();
+//                                }
+//                            });*/
+//
+//                            dialogo.setNeutralButton(getResources().getString(R.string.editar), new DialogInterface.OnClickListener() {
+//                                public void onClick(DialogInterface dialogo, int id) {
+//
+//                                    dialogo.cancel();
+//
+//                                    String idP = productos.getIdProducto();
+//                                    String nombreP = productos.getNombreP();
+//                                    String precioP = productos.getPrecioP();
+//                                    String cantidadP = productos.getCantidadP();
+//                                    String notaP = productos.getNotaP();
+//                                    String iconoP = productos.getIconoP();
+//                                    // para tener el string del icono tambien
+//                                    icono_art = productos.getIconoPString();
+//
+//                                    editarArticulo(idP, nombreP, precioP, cantidadP, notaP, iconoP);
+//
+//                                    obtenerIconos();
+//
+//                                }
+//                            });
+//
+//
+//                            dialogo.show();
+//
+//
+//
+//
+//                        }
+//                        else if (productos.getCheckP().equals("si")){
+//
+//                            editarCheck(productos.getIdProducto(), "no");
+//
+//                        }
+//                    }
+//                    else {
+//                        Toast.makeText(getApplicationContext(), getResources().getString(R.string.noautorizado), Toast.LENGTH_SHORT).show();
+//                    }
+//
+//                }
+//            });
+//
+//
+//        recyclerView.setAdapter(adapterProductos);
+//
+//
+//        progressDialog.dismiss();
+//
+//
+//    }
 
 
     public void obtenerArticulos(){
@@ -684,7 +682,7 @@ public class ActivityProductos extends AppCompatActivity {
             public void onClick(View v) {
 
                 //para usar solo listas y referenciasr con get listas.getIdLista() recibo de listas
-                Iconos iconos = dataIconos.get(recyclerView.getChildAdapterPosition(v));
+                Iconos iconos = dataIconos.get(recyclerViewIconos.getChildAdapterPosition(v));
 
                 /*Toast.makeText(getApplicationContext(), "Seleccion: "+
                         dataIconos.get(recyclerViewIconos.getChildAdapterPosition(v)).getNombreC(), Toast.LENGTH_SHORT).show();*/
@@ -1039,7 +1037,6 @@ public class ActivityProductos extends AppCompatActivity {
         requestQueue.add(stringRequest);
 
     }
-
 
 
     @Override

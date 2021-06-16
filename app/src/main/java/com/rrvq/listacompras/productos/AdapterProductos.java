@@ -11,6 +11,8 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
@@ -31,16 +33,11 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.rrvq.listacompras.AdminSQLiteOpenHelper;
 import com.rrvq.listacompras.R;
 
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.List;
@@ -53,7 +50,6 @@ public class AdapterProductos extends RecyclerView.Adapter<AdapterProductos.View
     private final Context context;
 
     private Productos productosChange;
-    private ViewHolder vholder;
 
     private ProgressDialog progressDialog;
 
@@ -84,7 +80,6 @@ public class AdapterProductos extends RecyclerView.Adapter<AdapterProductos.View
 
         datosSqlite();
         final Productos productos = data.get(position);
-        vholder = holder;
 
         //para no reciclar las vistas y que no se cambien de posicion los elementos
         //l desabilito
@@ -217,13 +212,14 @@ public class AdapterProductos extends RecyclerView.Adapter<AdapterProductos.View
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
+                holder.checkBox.setEnabled(false);
                 if (isChecked){
 
-                    editarCheck(productos.getIdProducto(), "si", position);
+                    editarCheck(productos.getIdProducto(), "si", position, holder);
 
                 }else {
 
-                    editarCheck(productos.getIdProducto(), "no", position);
+                    editarCheck(productos.getIdProducto(), "no", position, holder);
 
                 }
 
@@ -336,7 +332,7 @@ public class AdapterProductos extends RecyclerView.Adapter<AdapterProductos.View
 
 
 
-    public void editarCheck(final String id_art, final String check, final int position) {
+    public void editarCheck(final String id_art, final String check, final int position, final ViewHolder holder) {
 
         String url = context.getResources().getString(R.string.urleditarCheck);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
@@ -345,29 +341,24 @@ public class AdapterProductos extends RecyclerView.Adapter<AdapterProductos.View
 
                 if (response.equalsIgnoreCase("Editado")) {
 
-
                     productosChange = data.get(position);
+
 
                     guardaParametrosFrag(productosChange.getIdProducto(), productosChange.getNombreP(), productosChange.getPrecioP(),
                             productosChange.getCantidadP(),productosChange.getNotaP(),productosChange.getIconoP(),
                             productosChange.getIconoPString(),check,productosChange.getIdLista(),
                             productosChange.getId_usuarioCreador(),productosChange.getEditable());
 
-                    data.remove(position);
+//                    data.remove(position);
                     notifyDataSetChanged();
+                    //para no pulsar repetidas veces el check
+                    holder.checkBox.setEnabled(true);
 
 
                 } else {
 
                     Toast.makeText(context, context.getResources().getString(R.string.error), Toast.LENGTH_SHORT).show();
-
-                    if (check.equals("si")){
-                        vholder.checkBox.setChecked(true);
-
-                    }
-                    else if (check.equals("no")){
-                        vholder.checkBox.setChecked(false);
-                    }
+                    holder.checkBox.setEnabled(true);
 
 
                 }
@@ -378,15 +369,7 @@ public class AdapterProductos extends RecyclerView.Adapter<AdapterProductos.View
             public void onErrorResponse(VolleyError error) {
 
                 Toast.makeText(context, context.getResources().getString(R.string.conexion), Toast.LENGTH_SHORT).show();
-
-                if (check.equals("si")){
-                    vholder.checkBox.setChecked(true);
-
-                }
-                else if (check.equals("no")){
-                    vholder.checkBox.setChecked(false);
-                }
-
+                holder.checkBox.setEnabled(true);
 
             }
         }) {
