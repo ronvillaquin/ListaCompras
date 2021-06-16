@@ -7,11 +7,11 @@
     tools:context="com.rrvq.listacompras.productos.ActivityProductos">
 
 <!--    PRIMERA VISTA MOSTRAR ARTICULOS -->
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <!--<androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/vista1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="visible">
+        android:visibility="visible">-->
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView1"
@@ -279,13 +279,13 @@
         </com.google.android.gms.ads.AdView>
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
 
 
 
 
 <!--    SEGUNDA VISTA ADD Y EDIT ARTICULO -->
-    <androidx.constraintlayout.widget.ConstraintLayout
+   <!-- <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/vista2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -345,8 +345,8 @@
                 android:padding="5dp">
 
 
-               <!-- app:counterEnabled="true"
-                app:counterMaxLength="20"-->
+               &lt;!&ndash; app:counterEnabled="true"
+                app:counterMaxLength="20"&ndash;&gt;
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/etNombreL"
@@ -368,10 +368,10 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-<!--                Si solo le quita el style se ve da la otra forma -->
+&lt;!&ndash;                Si solo le quita el style se ve da la otra forma &ndash;&gt;
 
 
-                <!--<EditText
+                &lt;!&ndash;<EditText
                     android:id="@+id/etN"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -379,7 +379,7 @@
                     android:ems="13"
                     android:hint="@string/nombreproducto"
                     android:inputType="text"
-                    android:padding="8dp" />-->
+                    android:padding="8dp" />&ndash;&gt;
 
                 <ImageView
                     android:id="@+id/ivIconoSeleccion"
@@ -440,7 +440,7 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!--<EditText
+                &lt;!&ndash;<EditText
                     android:id="@+id/etCantidad"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -460,7 +460,7 @@
                     android:ems="13"
                     android:hint="@string/precio"
                     android:inputType="number"
-                    android:padding="8dp" />-->
+                    android:padding="8dp" />&ndash;&gt;
 
             </LinearLayout>
 
@@ -488,7 +488,7 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!--<EditText
+                &lt;!&ndash;<EditText
                     android:id="@+id/etNota"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -496,7 +496,7 @@
                     android:ems="13"
                     android:hint="@string/nota"
                     android:inputType="text"
-                    android:padding="8dp" />-->
+                    android:padding="8dp" />&ndash;&gt;
 
             </LinearLayout>
 
@@ -522,7 +522,7 @@
             app:layout_constraintEnd_toEndOf="parent" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>-->
 
 
 
