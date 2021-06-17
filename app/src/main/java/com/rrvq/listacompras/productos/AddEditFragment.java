@@ -3,10 +3,13 @@ package com.rrvq.listacompras.productos;
 import android.content.Context;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +18,7 @@ import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -39,6 +43,7 @@ public class AddEditFragment extends Fragment {
 
     private View view;
 
+    TextView tvTitleToolbar;
     // para los iconos precargados
      RecyclerView recyclerViewIconos;
      AdapterIconos adapterIconos;
@@ -80,7 +85,31 @@ public class AddEditFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_add_edit, container, false);
 
+        recibeParametros();
 
+        castingView();
+        obtenerIconos();
+
+        if (add_edit.equals("editar")){
+            llenarCamposEditar(idP,nombreP,precioP,cantidadP,notaP,iconoP);
+            //paracolocar titulo en el toolvar use texview porgue getsuportactionbar daba error
+            tvTitleToolbar.setText(getResources().getString(R.string.editarProducto));
+        }else {
+            btnFlotanteGuardar(add_edit,idP);
+            //paracolocar titulo en el toolvar use texview porgue getsuportactionbar daba error
+            tvTitleToolbar.setText(getResources().getString(R.string.agregarProducto));
+        }
+
+        cerrarFragment();
+
+
+
+        return view;
+    }
+
+
+
+    private void recibeParametros(){
         id_lista = this.getArguments().getString(Constantes.KEY_ID_LISTA);
         add_edit = this.getArguments().getString(Constantes.KEY_ADD_EDIT);
         idP = this.getArguments().getString(Constantes.KEY_ID_P);
@@ -89,22 +118,11 @@ public class AddEditFragment extends Fragment {
         cantidadP = this.getArguments().getString(Constantes.KEY_CANTIDAD_P);
         notaP = this.getArguments().getString(Constantes.KEY_NOTA_P);
         iconoP = this.getArguments().getString(Constantes.KEY_ICONO_P);
-
-        castingView();
-        obtenerIconos();
-
-        if (add_edit.equals("editar")){
-            llenarCamposEditar(idP,nombreP,precioP,cantidadP,notaP,iconoP);
-        }else {
-            btnFlotanteGuardar(add_edit,idP);
-        }
-
-        cerrarFragment();
-
-        return view;
     }
 
     private void castingView(){
+        tvTitleToolbar = view.findViewById(R.id.tvTitleToolbar);
+
         recyclerViewIconos = view.findViewById(R.id.recyclerviewIconos);
 
         btnFlotante2 = view.findViewById(R.id.btnFlotante2);

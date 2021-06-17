@@ -192,7 +192,9 @@
     <string name="premium">PREMIUM</string>
 
     <string name="abrir">Open</string>
-    <string name="cerrar">To close</string>
+    <string name="cerrar">Close</string>
+
+    <string name="editarProducto">Edit Product</string>
 
     <!--    para menu de listas-->
 

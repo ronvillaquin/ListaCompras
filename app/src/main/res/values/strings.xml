@@ -192,6 +192,8 @@
     <string name="abrir">Abrir</string>
     <string name="cerrar">Cerrar</string>
 
+    <string name="editarProducto">Editar Producto</string>
+
     <!--    para menu de listas-->
 
     <string name="seleccionar">Seleccionar todo</string>

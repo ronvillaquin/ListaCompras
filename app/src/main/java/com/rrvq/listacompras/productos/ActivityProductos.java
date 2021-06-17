@@ -237,7 +237,7 @@ public class ActivityProductos extends AppCompatActivity {
 //        getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>" + nombre_lista + "</font>"));
 
-        // para colocar icono de more 3 puntos de olor blanco
+        // para colocar icono de more 3 puntos de color blanco
         toolbar.setOverflowIcon(getResources().getDrawable(R.drawable.ic_more_vert_24_blanco));
 
     }
@@ -269,6 +269,36 @@ public class ActivityProductos extends AppCompatActivity {
         });
     }
 
+    public void llamarFragmentAdd(){
+
+        AddEditFragment addEditFragment = new AddEditFragment();
+
+        Bundle bundle = new Bundle();
+        bundle.putString(Constantes.KEY_ID_LISTA, id_lista);
+        bundle.putString(Constantes.KEY_ADD_EDIT, "add");
+        bundle.putString(Constantes.KEY_ID_P, "");
+        bundle.putString(Constantes.KEY_NOMBRE_P, "");
+        bundle.putString(Constantes.KEY_PRECIO_P, "");
+        bundle.putString(Constantes.KEY_CANTIDAD_P, "");
+        bundle.putString(Constantes.KEY_NOTA_P, "");
+        bundle.putString(Constantes.KEY_ICONO_P, "");
+
+        addEditFragment.setArguments(bundle);
+
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.mostrar, R.anim.ocultar);
+//                    fragmentTransaction.add(R.id.frameLayout, addEditFragment); //puede ser esta o la deabajo esta para crear nuevo
+        fragmentTransaction.replace(R.id.frameLayout, addEditFragment);
+        fragmentTransaction.commit();
+
+        //para que regrese al fragment o actividad anterior
+        fragmentTransaction.addToBackStack(null);
+
+        //para que lo esconda y se muestre el del fragment
+        ocultaBtnFlotante();
+
+    }
+
     public void btnFlotanteAdd(){
 
         // onclick del boton flotente
@@ -278,31 +308,7 @@ public class ActivityProductos extends AppCompatActivity {
 
                 if (editable.equals("si")) {
 
-                    AddEditFragment addEditFragment = new AddEditFragment();
-
-                    Bundle bundle = new Bundle();
-                    bundle.putString(Constantes.KEY_ID_LISTA, id_lista);
-                    bundle.putString(Constantes.KEY_ADD_EDIT, "add");
-                    bundle.putString(Constantes.KEY_ID_P, "");
-                    bundle.putString(Constantes.KEY_NOMBRE_P, "");
-                    bundle.putString(Constantes.KEY_PRECIO_P, "");
-                    bundle.putString(Constantes.KEY_CANTIDAD_P, "");
-                    bundle.putString(Constantes.KEY_NOTA_P, "");
-                    bundle.putString(Constantes.KEY_ICONO_P, "");
-
-                    addEditFragment.setArguments(bundle);
-
-                    FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                    fragmentTransaction.setCustomAnimations(R.anim.mostrar, R.anim.ocultar);
-//                    fragmentTransaction.add(R.id.frameLayout, addEditFragment); //puede ser esta o la deabajo esta para crear nuevo
-                    fragmentTransaction.replace(R.id.frameLayout, addEditFragment);
-                    fragmentTransaction.commit();
-
-                    //para que regrese al fragment o actividad anterior
-                    fragmentTransaction.addToBackStack(null);
-
-                    //para que lo esconda y se muestre el del fragment
-                    ocultaBtnFlotante();
+                    llamarFragmentAdd();
 
 
                 } else {
@@ -467,6 +473,8 @@ public class ActivityProductos extends AppCompatActivity {
 
                             linearImgAdd.setVisibility(View.VISIBLE);
                             editable = jsonObject.getString("editable");
+                            //si esta vacio llama a agregar producto
+                            llamarFragmentAdd();
 
                         } else {
 
@@ -531,54 +539,6 @@ public class ActivityProductos extends AppCompatActivity {
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(jsonArrayRequest);
-    }
-
-    public void editarCheck(final String id_art, final String check) {
-
-        String url = getResources().getString(R.string.urleditarCheck);
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-
-                if (response.equalsIgnoreCase("Editado")) {
-
-
-                    obtenerArticulos();
-
-                } else {
-
-                    Toast.makeText(getApplicationContext(), getResources().getString(R.string.error), Toast.LENGTH_SHORT).show();
-
-
-                }
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-                Toast.makeText(getApplicationContext(), getResources().getString(R.string.conexion), Toast.LENGTH_SHORT).show();
-
-
-            }
-        }) {
-
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-
-                Map<String, String> parametros = new HashMap<String, String>();
-
-                parametros.put("id_articulo", id_art);
-                parametros.put("check_art", check);
-
-
-                return parametros;
-            }
-        };
-
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(stringRequest);
-
     }
 
     public void obtenerCantidadAmigos(){
@@ -723,7 +683,7 @@ public class ActivityProductos extends AppCompatActivity {
             String id = flavor.getId();
             Boolean b = getBoolFromPref(this, "myPref", id);
 
-            if (b == true){
+            if (b){
 
                 mAdView.setVisibility(View.GONE);
 
@@ -764,7 +724,7 @@ public class ActivityProductos extends AppCompatActivity {
             String id = flavor.getId();
             Boolean b = getBoolFromPref(this, "myPref", id);
 
-            if (b == true) {
+            if (b) {
 
 
             } else {
@@ -803,8 +763,6 @@ public class ActivityProductos extends AppCompatActivity {
                 }
 
             }
-        }else if (sabor.equals("pro")){
-
         }
     }
 

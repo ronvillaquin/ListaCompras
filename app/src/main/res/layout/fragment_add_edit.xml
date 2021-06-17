@@ -25,7 +25,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar2"
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorPrimary"
@@ -40,6 +40,15 @@
                     android:background="?attr/selectableItemBackground"
                     android:src="@drawable/ic_baseline_close_24"
                     android:contentDescription="@string/descripcion"/>
+
+                <TextView
+                    android:id="@+id/tvTitleToolbar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="40dp"
+                    android:textSize="20sp"
+                    android:textColor="@color/colorBlanco"
+                    android:textStyle="bold|normal"/>
 
             </androidx.appcompat.widget.Toolbar>
 
