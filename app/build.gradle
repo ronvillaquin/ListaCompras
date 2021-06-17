@@ -8,7 +8,7 @@ android {
         applicationId "com.rrvq.listacompras"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 15
+        versionCode 16
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -25,12 +25,12 @@ android {
     productFlavors {
         free {
             applicationIdSuffix ".free"
-            versionName "2.2-free"
+            versionName "3.0-free"
 
         }
         pro {
             applicationIdSuffix ".pro"
-            versionName "2.2-pro"
+            versionName "3.0-pro"
 
         }
     }
