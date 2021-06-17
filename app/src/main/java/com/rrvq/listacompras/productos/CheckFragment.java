@@ -96,7 +96,6 @@ public class CheckFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                if (editable.equals("si")) {
                     //para usar solo listas y referenciasr con get listas.getIdLista() recibo de listas
                     final Productos productos = data.get(recyclerViewCheck.getChildAdapterPosition(v));
 
@@ -104,8 +103,6 @@ public class CheckFragment extends Fragment {
                             data.get(recyclerView.getChildAdapterPosition(v)).getNombreP()+
                             " ID: "+data.get(recyclerView.getChildAdapterPosition(v)).getIdProducto(), Toast.LENGTH_SHORT).show();*/
 
-
-                    if (productos.getCheckP().equals("si")){
 
                         final AlertDialog.Builder dialogo = new AlertDialog.Builder(getContext());
 
@@ -133,62 +130,60 @@ public class CheckFragment extends Fragment {
                         ivI.setImageResource(Integer.parseInt(productos.getIconoP()));
 
 
-                        dialogo.setPositiveButton(getResources().getString(R.string.editar), new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialogo, int id) {
+                        if (editable.equals("si")) {
+                            dialogo.setPositiveButton(getResources().getString(R.string.editar), new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialogo, int id) {
 
-                                dialogo.cancel();
+                                    dialogo.cancel();
 
-                                String idlista = productos.getIdLista();  // para enviar al fragment addEDIT
-                                String idP = productos.getIdProducto();
-                                String nombreP = productos.getNombreP();
-                                String precioP = productos.getPrecioP();
-                                String cantidadP = productos.getCantidadP();
-                                String notaP = productos.getNotaP();
-                                String iconoP = productos.getIconoP();
-                                // para tener el string del icono tambien
-                                icono_art = productos.getIconoPString();
-
-
-                                AddEditFragment addEditFragment = new AddEditFragment();
-
-                                Bundle bundle = new Bundle();
-                                bundle.putString(Constantes.KEY_ID_LISTA, idlista);
-                                bundle.putString(Constantes.KEY_ADD_EDIT, "editar");
-                                bundle.putString(Constantes.KEY_ID_P, idP);
-                                bundle.putString(Constantes.KEY_NOMBRE_P, nombreP);
-                                bundle.putString(Constantes.KEY_PRECIO_P, precioP);
-                                bundle.putString(Constantes.KEY_CANTIDAD_P, cantidadP);
-                                bundle.putString(Constantes.KEY_NOTA_P, notaP);
-                                bundle.putString(Constantes.KEY_ICONO_P, iconoP);
-
-                                addEditFragment.setArguments(bundle);
-
-                                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-                                fragmentTransaction.setCustomAnimations(R.anim.mostrar, R.anim.ocultar);
-                                fragmentTransaction.add(R.id.frameLayout, addEditFragment);
-                                fragmentTransaction.commit();
-
-                                //para que regrese al fragment o actividad anterior
-                                fragmentTransaction.addToBackStack(null);
-
-                                //para ocultar el btn de activity flotante
-                                ((ActivityProductos)getActivity()).ocultaBtnFlotante();
+                                    String idlista = productos.getIdLista();  // para enviar al fragment addEDIT
+                                    String idP = productos.getIdProducto();
+                                    String nombreP = productos.getNombreP();
+                                    String precioP = productos.getPrecioP();
+                                    String cantidadP = productos.getCantidadP();
+                                    String notaP = productos.getNotaP();
+                                    String iconoP = productos.getIconoP();
+                                    // para tener el string del icono tambien
+                                    icono_art = productos.getIconoPString();
 
 
-                            }
-                        });
+                                    AddEditFragment addEditFragment = new AddEditFragment();
+
+                                    Bundle bundle = new Bundle();
+                                    bundle.putString(Constantes.KEY_ID_LISTA, idlista);
+                                    bundle.putString(Constantes.KEY_ADD_EDIT, "editar");
+                                    bundle.putString(Constantes.KEY_ID_P, idP);
+                                    bundle.putString(Constantes.KEY_NOMBRE_P, nombreP);
+                                    bundle.putString(Constantes.KEY_PRECIO_P, precioP);
+                                    bundle.putString(Constantes.KEY_CANTIDAD_P, cantidadP);
+                                    bundle.putString(Constantes.KEY_NOTA_P, notaP);
+                                    bundle.putString(Constantes.KEY_ICONO_P, iconoP);
+
+                                    addEditFragment.setArguments(bundle);
+
+                                    FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                                    fragmentTransaction.setCustomAnimations(R.anim.mostrar, R.anim.ocultar);
+                                    fragmentTransaction.add(R.id.frameLayout, addEditFragment);
+                                    fragmentTransaction.commit();
+
+                                    //para que regrese al fragment o actividad anterior
+                                    fragmentTransaction.addToBackStack(null);
+
+                                    //para ocultar el btn de activity flotante
+                                    ((ActivityProductos)getActivity()).ocultaBtnFlotante();
 
 
-                        dialogo.show();
+                                }
+                            });
+
+                        } else {
+                            Toast.makeText(getContext(), getResources().getString(R.string.noautorizado), Toast.LENGTH_SHORT).show();
+
+                        }
 
 
+                            dialogo.show();
 
-
-                    }
-                }
-                else {
-                    Toast.makeText(getContext(), getResources().getString(R.string.noautorizado), Toast.LENGTH_SHORT).show();
-                }
 
             }
         });

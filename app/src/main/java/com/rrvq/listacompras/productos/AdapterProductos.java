@@ -207,26 +207,29 @@ public class AdapterProductos extends RecyclerView.Adapter<AdapterProductos.View
             }
         });
 
-        holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-                holder.checkBox.setEnabled(false);
-                if (isChecked){
+        if (productos.getEditable().equals("no")) {
+            holder.checkBox.setEnabled(false);
+        }
 
-                    editarCheck(productos.getIdProducto(), "si", position, holder);
 
-                }else {
+            holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-                    editarCheck(productos.getIdProducto(), "no", position, holder);
+                    holder.checkBox.setEnabled(false);
+                    if (isChecked){
+
+                        editarCheck(productos.getIdProducto(), "si", position, holder);
+
+                    }else {
+
+                        editarCheck(productos.getIdProducto(), "no", position, holder);
+
+                    }
 
                 }
-
-            }
-        });
-
-
-
+            });
 
 
     }
