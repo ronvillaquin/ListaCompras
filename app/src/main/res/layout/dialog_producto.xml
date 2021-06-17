@@ -11,7 +11,9 @@
     <ImageView
         android:id="@+id/ivIcono"
         android:src="@drawable/abarrotes"
-        android:layout_width="match_parent"
+
+        android:layout_gravity="center"
+        android:layout_width="64dp"
         android:layout_height="64dp"
         android:scaleType="center"
         android:contentDescription="@string/descripcion" />
@@ -122,33 +124,13 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
         android:orientation="horizontal"
+        android:gravity="end"
         android:padding="5dp"
         android:layout_marginTop="10dp">
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-
-            <ImageView
-                android:src="@drawable/ic_edit_24_dialog"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:scaleType="center"
-                android:contentDescription="@string/descripcion" />
-
-        </LinearLayout>
-
-        <!--<ImageView
-            android:src="@drawable/ic_close_24_dialog"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="25dp"
-            android:scaleType="center"
-            android:contentDescription="@string/descripcion" />-->
 
         <ImageView
-            android:src="@drawable/ic_check_24"
+            android:src="@drawable/ic_edit_24_dialog"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"

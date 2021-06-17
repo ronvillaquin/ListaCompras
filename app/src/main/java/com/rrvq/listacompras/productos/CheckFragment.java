@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -36,7 +37,6 @@ public class CheckFragment extends Fragment {
     AdapterProductos adapterProductos;
     String responseDATA;
     String editable;
-    ActivityProductos activityProductos;
     String icono_art = "abarrotes";
 
     public CheckFragment() {
@@ -63,8 +63,6 @@ public class CheckFragment extends Fragment {
 
         recyclerViewCheck = view.findViewById(R.id.recyclerviewCheck);
 //        swipeRefreshLayout = view.findViewById(R.id.refreshRecycler);
-
-       activityProductos = new ActivityProductos();
 
     }
 
@@ -134,28 +132,13 @@ public class CheckFragment extends Fragment {
                         etnotaP.setText(productos.getNotaP());
                         ivI.setImageResource(Integer.parseInt(productos.getIconoP()));
 
-                        //para el bootn aceptar del dialogo
-                        dialogo.setPositiveButton(getResources().getString(R.string.check), new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialogo, int id) {
 
-                                //cuando se da check se envia a editar a check
-                                activityProductos.editarCheck(productos.getIdProducto(), "si");
-
-                            }
-                        });
-        /*
-                            dialogo.setNegativeButton(getResources().getString(R.string.cancelar), new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialogo, int id) {
-                                    // accion si da cancelar que no haga nada
-                                    dialogo.cancel();
-                                }
-                            });*/
-
-                        dialogo.setNeutralButton(getResources().getString(R.string.editar), new DialogInterface.OnClickListener() {
+                        dialogo.setPositiveButton(getResources().getString(R.string.editar), new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialogo, int id) {
 
                                 dialogo.cancel();
 
+                                String idlista = productos.getIdLista();  // para enviar al fragment addEDIT
                                 String idP = productos.getIdProducto();
                                 String nombreP = productos.getNombreP();
                                 String precioP = productos.getPrecioP();
@@ -165,9 +148,32 @@ public class CheckFragment extends Fragment {
                                 // para tener el string del icono tambien
                                 icono_art = productos.getIconoPString();
 
-                                activityProductos.editarArticulo(idP, nombreP, precioP, cantidadP, notaP, iconoP);
 
-                                activityProductos.obtenerIconos();
+                                AddEditFragment addEditFragment = new AddEditFragment();
+
+                                Bundle bundle = new Bundle();
+                                bundle.putString(Constantes.KEY_ID_LISTA, idlista);
+                                bundle.putString(Constantes.KEY_ADD_EDIT, "editar");
+                                bundle.putString(Constantes.KEY_ID_P, idP);
+                                bundle.putString(Constantes.KEY_NOMBRE_P, nombreP);
+                                bundle.putString(Constantes.KEY_PRECIO_P, precioP);
+                                bundle.putString(Constantes.KEY_CANTIDAD_P, cantidadP);
+                                bundle.putString(Constantes.KEY_NOTA_P, notaP);
+                                bundle.putString(Constantes.KEY_ICONO_P, iconoP);
+
+                                addEditFragment.setArguments(bundle);
+
+                                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                                fragmentTransaction.setCustomAnimations(R.anim.mostrar, R.anim.ocultar);
+                                fragmentTransaction.add(R.id.frameLayout, addEditFragment);
+                                fragmentTransaction.commit();
+
+                                //para que regrese al fragment o actividad anterior
+                                fragmentTransaction.addToBackStack(null);
+
+                                //para ocultar el btn de activity flotante
+                                ((ActivityProductos)getActivity()).ocultaBtnFlotante();
+
 
                             }
                         });

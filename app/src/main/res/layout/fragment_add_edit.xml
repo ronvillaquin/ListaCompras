@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:elevation="6dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".productos.AddEditFragment">
 
@@ -103,8 +104,8 @@
 
                 <ImageView
                     android:id="@+id/ivIconoSeleccion"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
                     android:layout_marginHorizontal="10dp"
                     android:contentDescription="@string/descripcion"
                     android:src="@drawable/abarrotes" />

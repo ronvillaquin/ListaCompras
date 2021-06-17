@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="?attr/selectableItemBackground"
     android:orientation="vertical">
 
 
@@ -48,8 +49,8 @@
 
     <ImageView
         android:id="@+id/imgIcono"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
         android:src="@drawable/salir24"
         android:contentDescription="@string/descripcion"/>
 

@@ -47,6 +47,7 @@ public class ViewPageAdapter extends FragmentStateAdapter {
         return fragment;
     }
 
+
     @Override
     public int getItemCount() {
         // retorno la cantidad de tabs que cree

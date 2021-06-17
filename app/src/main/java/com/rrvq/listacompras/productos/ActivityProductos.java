@@ -84,36 +84,15 @@ public class ActivityProductos extends AppCompatActivity {
     SwipeRefreshLayout swipeRefreshLayout;
     ProgressDialog progressDialog;
 
-    // para los iconos precargados
-    RecyclerView recyclerViewIconos;
-    AdapterIconos adapterIconos;
-    ArrayList<Iconos> dataIconos = new ArrayList<>();
-    //no se cambia por string porque son nombres de las imagenes
-    String[] imgIconos = {"abarrotes", "aceites","agua","bebidas","alcohol","cafe","lacteos","pan","reposteria",
-            "dulces","carnes","pescados","congelados","conservados","enlatados","salsas","frutas","vegetales","preparada",
-            "mascotas","higiene","hogar","limpieza","libros","ropa","bebes","belleza","salud","vehiculos","electrodomesticos"};
-    int[] nombreIconos = {R.string.abarrotes, R.string.aceites, R.string.agua, R.string.bebidas, R.string.alcohol,
-            R.string.cafe,R.string.lacteos,R.string.pan,R.string.reposteria,R.string.dulces,R.string.carnes,
-            R.string.pescados,R.string.congelados,R.string.conservados,R.string.enlatados,R.string.salsas,R.string.frutas,
-            R.string.vegetales,R.string.preparada,R.string.mascotas,R.string.higiene,R.string.hogar,R.string.limpieza,
-            R.string.libros,R.string.ropa,R.string.bebes,R.string.belleza,R.string.salud,R.string.vehiculos,R.string.electrodomesticos};
-
-    TextInputLayout etNombreLayout, etPrecioLayout, etCantidadLayout, etNotaLayout;
-    TextInputEditText etNombre, etPrecio, etCantidad, etNota;
 
     TextView tvtotalMarcado, tvTotalSinMarcar, tvTotalTotal;
     float totalMarcado, totalSinMarcar, totalTotal;
     DecimalFormat formato = new DecimalFormat("#.#");
 
-    ConstraintLayout vista1, vista2;
-
-    FloatingActionButton btnFlotante, btnFlotante2;
-    ImageButton ibx, ibAmigos;
-    int auxAdd = 0;
+    FloatingActionButton btnFlotante;
+    ImageButton  ibAmigos;
 
     String id_lista, nombre_lista;
-    ImageView ivIconoSeleccion;
-    String icono_art = "abarrotes";
 
     TextView tvAmigos;
 
@@ -146,35 +125,6 @@ public class ActivityProductos extends AppCompatActivity {
         verificar();
         datosSqlite();
 
-
-        // para cerrar la vista 2
-        ibx.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.ocultar);
-                vista2.startAnimation(animation);
-
-                vista1.setVisibility(View.VISIBLE);
-                vista2.setVisibility(View.GONE);
-
-                auxAdd = 0;
-
-                etNombre.setText("");
-                etPrecio.setText("");
-                etCantidad.setText("1");
-                etNota.setText("");
-
-                // para que se guarde el teclado
-                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(etNombre.getWindowToken(), 0);
-                imm.hideSoftInputFromWindow(etPrecio.getWindowToken(), 0);
-                imm.hideSoftInputFromWindow(etCantidad.getWindowToken(), 0);
-                imm.hideSoftInputFromWindow(etNota.getWindowToken(), 0);
-
-            }
-        });
-
         ibAmigos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -200,7 +150,6 @@ public class ActivityProductos extends AppCompatActivity {
 
         obtenerArticulos();
         btnFlotanteAdd();
-        btnFlotanteGuardar("", ""); //mando variable string para poder comparar si es editar o guarda nuevo
         refrescarRecycler();
 
         obtenerCantidadAmigos();
@@ -263,27 +212,11 @@ public class ActivityProductos extends AppCompatActivity {
 
 //        recyclerView = findViewById(R.id.recyclerview);
         swipeRefreshLayout = findViewById(R.id.refreshRecycler);
-        recyclerViewIconos = findViewById(R.id.recyclerviewIconos);
 
         toolbar = findViewById(R.id.toolbar);
         btnFlotante = findViewById(R.id.btnFlotante);
-        btnFlotante2 = findViewById(R.id.btnFlotante2);
-        ibx = findViewById(R.id.ibx);
+
         ibAmigos = findViewById(R.id.ibAmigos);
-        vista1 = findViewById(R.id.vista1);
-        vista2 = findViewById(R.id.vista2);
-
-        ivIconoSeleccion = findViewById(R.id.ivIconoSeleccion);
-
-        etNombre = findViewById(R.id.etNombre);
-        etPrecio = findViewById(R.id.etPrecio);
-        etCantidad = findViewById(R.id.etCantidad);
-        etNota = findViewById(R.id.etNota);
-
-        etNombreLayout = findViewById(R.id.etNombreL);
-        etPrecioLayout = findViewById(R.id.etPrecioLayout);
-        etCantidadLayout = findViewById(R.id.etCantidadLayout);
-        etNotaLayout = findViewById(R.id.etNotaLayout);
 
         tvtotalMarcado = findViewById(R.id.tvTotalMarcado);
         tvTotalSinMarcar = findViewById(R.id.tvTotalSinMarcar);
@@ -344,15 +277,34 @@ public class ActivityProductos extends AppCompatActivity {
             public void onClick(View v) {
 
                 if (editable.equals("si")) {
-                    Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.mostrar);
-                    vista2.startAnimation(animation);
 
-                    vista1.setVisibility(View.GONE);
-                    vista2.setVisibility(View.VISIBLE);
+                    AddEditFragment addEditFragment = new AddEditFragment();
 
-                    auxAdd = 1;
+                    Bundle bundle = new Bundle();
+                    bundle.putString(Constantes.KEY_ID_LISTA, id_lista);
+                    bundle.putString(Constantes.KEY_ADD_EDIT, "add");
+                    bundle.putString(Constantes.KEY_ID_P, "");
+                    bundle.putString(Constantes.KEY_NOMBRE_P, "");
+                    bundle.putString(Constantes.KEY_PRECIO_P, "");
+                    bundle.putString(Constantes.KEY_CANTIDAD_P, "");
+                    bundle.putString(Constantes.KEY_NOTA_P, "");
+                    bundle.putString(Constantes.KEY_ICONO_P, "");
 
-                    obtenerIconos();
+                    addEditFragment.setArguments(bundle);
+
+                    FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                    fragmentTransaction.setCustomAnimations(R.anim.mostrar, R.anim.ocultar);
+//                    fragmentTransaction.add(R.id.frameLayout, addEditFragment); //puede ser esta o la deabajo esta para crear nuevo
+                    fragmentTransaction.replace(R.id.frameLayout, addEditFragment);
+                    fragmentTransaction.commit();
+
+                    //para que regrese al fragment o actividad anterior
+                    fragmentTransaction.addToBackStack(null);
+
+                    //para que lo esconda y se muestre el del fragment
+                    ocultaBtnFlotante();
+
+
                 } else {
                     Toast.makeText(getApplicationContext(), getResources().getString(R.string.noautorizado), Toast.LENGTH_SHORT).show();
 
@@ -667,303 +619,6 @@ public class ActivityProductos extends AppCompatActivity {
 
     //*******************************Pantalla 2 guardar nuevo producto *****************//
 
-    public void setRecyclerViewIconos(){
-        //----------------para el recyclervie
-        /*data.add(new Listas("1", "Casa", "5/8", "30"));
-        data.add(new Listas("2", "1", "5/8", "10"));*/
-
-//        recyclerViewIconos.setLayoutManager(new LinearLayoutManager(this));
-        recyclerViewIconos.setLayoutManager(new GridLayoutManager(this, 3));
-        adapterIconos = new AdapterIconos(this, dataIconos);
-
-
-        adapterIconos.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                //para usar solo listas y referenciasr con get listas.getIdLista() recibo de listas
-                Iconos iconos = dataIconos.get(recyclerViewIconos.getChildAdapterPosition(v));
-
-                /*Toast.makeText(getApplicationContext(), "Seleccion: "+
-                        dataIconos.get(recyclerViewIconos.getChildAdapterPosition(v)).getNombreC(), Toast.LENGTH_SHORT).show();*/
-
-                icono_art = iconos.getIconString();
-                ivIconoSeleccion.setImageResource(Integer.parseInt(iconos.getIcono()));
-
-            }
-        });
-
-
-        recyclerViewIconos.setAdapter(adapterIconos);
-
-    }
-
-    public void obtenerIconos(){
-
-        dataIconos.clear();
-        for (int i=0; i<imgIconos.length; i++){
-
-
-            int imgs = getResources().getIdentifier(imgIconos[i], "drawable", getPackageName());
-            String imgss = String.valueOf(imgs);
-
-            dataIconos.add(new Iconos(imgss, getString(nombreIconos[i]), imgIconos[i]));
-        }
-
-        setRecyclerViewIconos();
-
-    }
-
-    public void btnFlotanteGuardar(final String auxS, final String idP){
-
-        // onclick del boton flotente
-        btnFlotante2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if (auxS.equals("editar")){
-
-                    if (!etNombre.getText().toString().isEmpty()) {
-
-//                    etNombreLayout.setError("");
-
-                        String nombre_art = etNombreLayout.getEditText().getText().toString().trim();
-                        String cantidad_art = etCantidadLayout.getEditText().getText().toString().trim();
-                        String precio_art = etPrecioLayout.getEditText().getText().toString().trim();
-                        String nota_art = etNotaLayout.getEditText().getText().toString().trim();
-
-                    /*String cantidad_art = etCantidad.getText().toString();
-                    String precio_art = etPrecio.getText().toString();
-                    String nota_art = etNota.getText().toString();*/
-
-                        guardarArticuloEditado(idP, nombre_art, cantidad_art, precio_art, nota_art);
-
-                        etNombreLayout.setError("");
-
-                        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                        imm.hideSoftInputFromWindow(etNombre.getWindowToken(), 0);
-                        imm.hideSoftInputFromWindow(etPrecio.getWindowToken(), 0);
-                        imm.hideSoftInputFromWindow(etCantidad.getWindowToken(), 0);
-                        imm.hideSoftInputFromWindow(etNota.getWindowToken(), 0);
-
-                        btnFlotanteGuardar("",""); // lo coloco sin nada los parametros de nuevo
-
-                    } else {
-
-                        etNombreLayout.setError(getResources().getString(R.string.requerido));
-                    }
-
-                }
-                else {
-
-
-                    if (!etNombre.getText().toString().isEmpty()) {
-
-//                    etNombreLayout.setError("");
-
-                        String nombre_art = etNombreLayout.getEditText().getText().toString().trim();
-                        String cantidad_art = etCantidadLayout.getEditText().getText().toString().trim();
-                        String precio_art = etPrecioLayout.getEditText().getText().toString().trim();
-                        String nota_art = etNotaLayout.getEditText().getText().toString().trim();
-
-                    /*String cantidad_art = etCantidad.getText().toString();
-                    String precio_art = etPrecio.getText().toString();
-                    String nota_art = etNota.getText().toString();*/
-
-                        guardarArticulo(nombre_art, cantidad_art, precio_art, nota_art);
-
-                        etNombre.setText("");
-                        etPrecio.setText("");
-                        etCantidad.setText("1");
-                        etNota.setText("");
-
-                        etNombreLayout.setError("");
-
-                        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                        imm.hideSoftInputFromWindow(etNombre.getWindowToken(), 0);
-                        imm.hideSoftInputFromWindow(etPrecio.getWindowToken(), 0);
-                        imm.hideSoftInputFromWindow(etCantidad.getWindowToken(), 0);
-                        imm.hideSoftInputFromWindow(etNota.getWindowToken(), 0);
-
-                    } else {
-
-                        etNombreLayout.setError(getResources().getString(R.string.requerido));
-                    }
-
-                }
-
-
-
-            }
-        });
-    }
-
-    public void editarArticulo(String idP, String nombreP, String precioP, String cantidadP, String notaP, String iconoP) {
-
-        Animation animation = AnimationUtils.loadAnimation(this, R.anim.mostrar);
-        vista2.startAnimation(animation);
-
-        vista1.setVisibility(View.GONE);
-        vista2.setVisibility(View.VISIBLE);
-
-        auxAdd = 1;
-
-        etNombre.setText(nombreP);
-        ivIconoSeleccion.setImageResource(Integer.parseInt(iconoP));
-        etCantidad.setText(cantidadP);
-        etPrecio.setText(precioP);
-        etNota.setText(notaP);
-
-        btnFlotanteGuardar("editar", idP);
-
-    }
-
-    private void guardarArticuloEditado(final String idP, final String nombre_art, final String cantidad_art, final String precio_art, final String nota_art) {
-
-
-        progressDialog.show();
-
-        String url = getResources().getString(R.string.urleditarArticulo);
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-
-                if (response.equalsIgnoreCase("Editado")) {
-
-                    Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.ocultar);
-                    vista2.startAnimation(animation);
-
-                    vista1.setVisibility(View.VISIBLE);
-                    vista2.setVisibility(View.GONE);
-
-                    auxAdd = 0;
-
-
-                    obtenerArticulos();
-                    progressDialog.dismiss();
-
-                    etNombre.setText("");
-                    etPrecio.setText("");
-                    etCantidad.setText("1");
-                    etNota.setText("");
-
-
-                } else {
-
-                    Toast.makeText(getApplicationContext(), getResources().getString(R.string.error), Toast.LENGTH_SHORT).show();
-
-                    progressDialog.dismiss();
-
-                }
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-                progressDialog.dismiss();
-                Toast.makeText(getApplicationContext(), getResources().getString(R.string.conexion), Toast.LENGTH_SHORT).show();
-
-
-            }
-        }) {
-
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-
-                Map<String, String> parametros = new HashMap<String, String>();
-
-                parametros.put("id_articulo", idP);
-                parametros.put("nombre_art", nombre_art);
-                parametros.put("precio_art", precio_art);
-                parametros.put("cantidad_art", cantidad_art);
-                parametros.put("nota_art", nota_art);
-                parametros.put("icono_art", icono_art);
-
-
-                return parametros;
-            }
-        };
-
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(stringRequest);
-
-    }
-
-
-    private void guardarArticulo(final String nombre_art, final String cantidad_art, final String precio_art, final String nota_art) {
-
-        progressDialog.show();
-
-        String url = getResources().getString(R.string.urlagregarArticulo);
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-
-                if (response.equalsIgnoreCase("Registrado")) {
-
-                    Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.ocultar);
-                    vista2.startAnimation(animation);
-
-                    vista1.setVisibility(View.VISIBLE);
-                    vista2.setVisibility(View.GONE);
-
-                    auxAdd = 0;
-
-
-                    obtenerArticulos();
-                    progressDialog.dismiss();
-
-                } else {
-
-                    Toast.makeText(getApplicationContext(), getResources().getString(R.string.error), Toast.LENGTH_SHORT).show();
-
-                    progressDialog.dismiss();
-
-                }
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-                progressDialog.dismiss();
-                Toast.makeText(getApplicationContext(), getResources().getString(R.string.conexion), Toast.LENGTH_SHORT).show();
-
-
-            }
-        }) {
-
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-
-                Map<String, String> parametros = new HashMap<String, String>();
-
-                parametros.put("nombre_art", nombre_art);
-                parametros.put("precio_art", precio_art);
-                parametros.put("cantidad_art", cantidad_art);
-                parametros.put("nota_art", nota_art);
-                parametros.put("icono_art", icono_art);
-                parametros.put("check_art", "no");
-                parametros.put("id_lista", id_lista);
-
-
-                return parametros;
-            }
-        };
-
-        // para cuando hago peticiones con requesstring solamente ************
-        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
-                0,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(stringRequest);
-
-    }
-
-
 
     //************************GENERAL   **************************************//
 
@@ -1042,28 +697,7 @@ public class ActivityProductos extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
-        if (auxAdd == 1){
-            Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.ocultar);
-            vista2.startAnimation(animation);
-
-            vista1.setVisibility(View.VISIBLE);
-            vista2.setVisibility(View.GONE);
-            auxAdd = 0;
-
-            etNombre.setText("");
-            etPrecio.setText("");
-            etCantidad.setText("1");
-            etNota.setText("");
-
-            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(etNombre.getWindowToken(), 0);
-            imm.hideSoftInputFromWindow(etPrecio.getWindowToken(), 0);
-            imm.hideSoftInputFromWindow(etCantidad.getWindowToken(), 0);
-            imm.hideSoftInputFromWindow(etNota.getWindowToken(), 0);
-
-        }else {
             finish();
-        }
 
     }
 
@@ -1172,6 +806,13 @@ public class ActivityProductos extends AppCompatActivity {
         }else if (sabor.equals("pro")){
 
         }
+    }
+
+    public void muestraBtnFlotante(){
+        btnFlotante.setVisibility(View.VISIBLE);
+    }
+    public void ocultaBtnFlotante(){
+        btnFlotante.setVisibility(View.GONE);
     }
 
 }
