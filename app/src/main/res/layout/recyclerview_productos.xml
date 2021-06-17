@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="?attr/selectableItemBackground"
     android:orientation="vertical">
 
 
@@ -30,18 +31,26 @@
         android:padding="10dp"
         android:enabled="false"/>-->
 
-        <ImageView
+       <!-- <ImageView
             android:id="@+id/ivCheck"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginVertical="10dp"
             android:src="@drawable/ic_casilla_check_24"
             android:layout_marginHorizontal="10dp"
-            android:contentDescription="@string/descripcion"/>
+            android:contentDescription="@string/descripcion"
+            android:background="?selectableItemBackground"/>-->
+
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:id="@+id/checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"/>
 
     <ImageView
         android:id="@+id/imgIcono"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
         android:src="@drawable/salir24"
         android:contentDescription="@string/descripcion"/>
 

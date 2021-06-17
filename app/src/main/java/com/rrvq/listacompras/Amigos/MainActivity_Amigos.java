@@ -12,7 +12,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -96,6 +100,7 @@ public class MainActivity_Amigos extends AppCompatActivity {
 
         castinView();
         toolbarMenu();
+//        flechaBlanca();
         datosSqlite();
 
         verificar();
@@ -186,10 +191,19 @@ public class MainActivity_Amigos extends AppCompatActivity {
 
     public void toolbarMenu() {
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+//        getSupportActionBar().setDisplayShowTitleEnabled(false);
         //        getSupportActionBar().setDisplayShowTitleEnabled(false);
-//        getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>" + getResources().getString(R.string.listas) + "</font>"));
+        getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>" + getResources().getString(R.string.amigos) + "</font>"));
 
+    }
+
+    public void flechaBlanca() {
+
+        // pra colocar la flecha de color blanco de volver
+        final Drawable upArrow = getResources().getDrawable(R.drawable.abc_ic_ab_back_material);
+        upArrow.setColorFilter(Color.parseColor("#FFFFFF"), PorterDuff.Mode.SRC_ATOP);
+        getSupportActionBar().setHomeAsUpIndicator(upArrow);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);  // flecha de volver atras
     }
 
     public void refrescarRecycler() {
@@ -200,7 +214,6 @@ public class MainActivity_Amigos extends AppCompatActivity {
 
 
                 obtenerAmigos();
-                adapterAmigos.notifyDataSetChanged();
 
                 //swipe tiempo de demora del circulo pprogreso
 //                swipeRefreshLayout.setRefreshing(false);
@@ -318,6 +331,9 @@ public class MainActivity_Amigos extends AppCompatActivity {
 //                Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_SHORT).show();
 
                 setRecyclerView();
+
+                adapterAmigos.notifyDataSetChanged();
+
 
             }
         }, new Response.ErrorListener() {

@@ -2,16 +2,19 @@ package com.rrvq.listacompras.productos;
 
 
 import android.app.ProgressDialog;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -25,6 +28,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -32,7 +36,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.rrvq.listacompras.AdminSQLiteOpenHelper;
-import com.rrvq.listacompras.MainActivity;
 import com.rrvq.listacompras.R;
 
 
@@ -42,9 +45,11 @@ import java.util.Map;
 
 public class AdapterProductos extends RecyclerView.Adapter<AdapterProductos.ViewHolder> implements View.OnClickListener {
 
-    private LayoutInflater layoutInflater;
-    private List<Productos> data;
-    private Context context;
+    private final LayoutInflater layoutInflater;
+    private final List<Productos> data;
+    private final Context context;
+
+    private Productos productosChange;
 
     private ProgressDialog progressDialog;
 
@@ -88,13 +93,17 @@ public class AdapterProductos extends RecyclerView.Adapter<AdapterProductos.View
 
         if (productos.getCheckP().equals("no")) {
             holder.linearC.setBackgroundResource(android.R.color.transparent);
-            holder.ivCheck.setImageResource(R.drawable.ic_casilla_check_24);
+            holder.linearDivisor.setBackgroundResource(R.color.transparente);
+
+            holder.checkBox.setChecked(false);
+//            holder.ivCheck.setImageResource(R.drawable.ic_casilla_check_24);
         } else if (productos.getCheckP().equals("si")) {
             holder.linearDivisor.setBackgroundResource(R.color.transparente);
-            holder.linearC.setBackgroundResource(R.color.colorGrisProducto);
-            holder.ivCheck.setImageResource(R.drawable.ic_check_24);
-            holder.cardView.setElevation(0);
-            holder.cardView.setRadius(0);
+            holder.checkBox.setChecked(true);
+//            holder.linearC.setBackgroundResource(R.color.sombreproductoCheck);
+//            holder.ivCheck.setImageResource(R.drawable.ic_check_24);
+//            holder.cardView.setElevation(0);
+//            holder.cardView.setRadius(0);
         }
 
         if (!productos.getId_usuarioCreador().equals(id_usuario)){
@@ -199,6 +208,30 @@ public class AdapterProductos extends RecyclerView.Adapter<AdapterProductos.View
         });
 
 
+        if (productos.getEditable().equals("no")) {
+            holder.checkBox.setEnabled(false);
+        }
+
+
+            holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                    holder.checkBox.setEnabled(false);
+                    if (isChecked){
+
+                        editarCheck(productos.getIdProducto(), "si", position, holder);
+
+                    }else {
+
+                        editarCheck(productos.getIdProducto(), "no", position, holder);
+
+                    }
+
+                }
+            });
+
+
     }
 
     @Override
@@ -225,12 +258,13 @@ public class AdapterProductos extends RecyclerView.Adapter<AdapterProductos.View
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
 //        CheckBox checkBox;
-        ImageView ivCheck;
+//        ImageView ivCheck;
         ImageView imgIcono;
         ImageButton ibmore;
         TextView tvnombreP, tvcantidadP, tvprecioP;
         LinearLayout linearC, linearDivisor;
         CardView cardView;
+        CheckBox checkBox;
 
         //para el click largo falta
 //        View mView;
@@ -239,7 +273,7 @@ public class AdapterProductos extends RecyclerView.Adapter<AdapterProductos.View
             super(itemView);
 
 //            checkBox = itemView.findViewById(R.id.Checkbox);
-            ivCheck = itemView.findViewById(R.id.ivCheck);
+//            ivCheck = itemView.findViewById(R.id.ivCheck);
             imgIcono = itemView.findViewById(R.id.imgIcono);
             tvnombreP = itemView.findViewById(R.id.tvnombreProducto);
             tvnombreP = itemView.findViewById(R.id.tvnombreProducto);
@@ -249,6 +283,8 @@ public class AdapterProductos extends RecyclerView.Adapter<AdapterProductos.View
             linearDivisor = itemView.findViewById(R.id.linearDivisor);
             cardView = itemView.findViewById(R.id.cardView);
             ibmore = itemView.findViewById(R.id.ibmore);
+            checkBox = itemView.findViewById(R.id.checkbox);
+
 
             //para click largo falta
 //            mView = itemView;
@@ -265,6 +301,105 @@ public class AdapterProductos extends RecyclerView.Adapter<AdapterProductos.View
         if (fila.moveToFirst()) {
             id_usuario = fila.getString(0);
         }
+
+        baseDeDatos.close();
+    }
+
+    public void guardaParametrosFrag(String idProducto, String nombreP, String precioP, String cantidadP, String notaP,
+                                     String iconoP, String iconoPString, String checkP, String idLista, String id_usuarioCreador,
+                                     String editable){
+
+        //Conexion a la base de datos SQLITE
+        AdminSQLiteOpenHelper adminDB = new AdminSQLiteOpenHelper(context, "BDListas", null, 1);
+        SQLiteDatabase baseDeDatos = adminDB.getWritableDatabase();
+
+        ContentValues addParametro = new ContentValues();
+        addParametro.put("idProducto", idProducto);
+        addParametro.put("nombreP", nombreP);
+        addParametro.put("precioP", precioP);
+        addParametro.put("cantidadP", cantidadP);
+        addParametro.put("notaP", notaP);
+        addParametro.put("iconoP", iconoP);
+        addParametro.put("iconoPString", iconoPString);
+        addParametro.put("checkP", checkP);
+        addParametro.put("idLista", idLista);
+        addParametro.put("id_usuarioCreador", id_usuarioCreador);
+        addParametro.put("editable", editable);
+
+        baseDeDatos.insert("pasarValores", null, addParametro);
+
+        baseDeDatos.close();
+
+    }
+
+
+
+    public void editarCheck(final String id_art, final String check, final int position, final ViewHolder holder) {
+
+        String url = context.getResources().getString(R.string.urleditarCheck);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                if (response.equalsIgnoreCase("Editado")) {
+
+                    productosChange = data.get(position);
+
+
+
+                    guardaParametrosFrag(productosChange.getIdProducto(), productosChange.getNombreP(), productosChange.getPrecioP(),
+                            productosChange.getCantidadP(),productosChange.getNotaP(),productosChange.getIconoP(),
+                            productosChange.getIconoPString(),check,productosChange.getIdLista(),
+                            productosChange.getId_usuarioCreador(),productosChange.getEditable());
+
+
+                    data.remove(position);
+                    notifyDataSetChanged();
+                    //para no pulsar repetidas veces el check
+                    holder.checkBox.setEnabled(true);
+
+
+                } else {
+
+                    Toast.makeText(context, context.getResources().getString(R.string.error), Toast.LENGTH_SHORT).show();
+                    holder.checkBox.setEnabled(true);
+
+
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                Toast.makeText(context, context.getResources().getString(R.string.conexion), Toast.LENGTH_SHORT).show();
+                holder.checkBox.setEnabled(true);
+
+            }
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+                Map<String, String> parametros = new HashMap<String, String>();
+
+                parametros.put("id_articulo", id_art);
+                parametros.put("check_art", check);
+
+
+                return parametros;
+            }
+        };
+
+        // para cuando hago peticiones con requesstring solamente ************
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                0,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(stringRequest);
+
     }
 
 

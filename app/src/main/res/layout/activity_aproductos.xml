@@ -6,13 +6,22 @@
     android:layout_height="match_parent"
     tools:context="com.rrvq.listacompras.productos.ActivityProductos">
 
-
 <!--    PRIMERA VISTA MOSTRAR ARTICULOS -->
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <!--<androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/vista1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="visible">
+        android:visibility="visible">-->
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView1"
@@ -69,8 +78,14 @@
             app:cardElevation="3dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView1"
-            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MaterialCardView.Cut">
+            app:layout_constraintTop_toBottomOf="@+id/cardView1">
+<!--            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MaterialCardView.Cut">-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:baselineAligned="false"
+                android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -153,30 +168,58 @@
 
                 </LinearLayout>
 
+            </LinearLayout>
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tabChecks"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    app:tabIndicatorColor="@color/colorPrimary"
+                    app:tabSelectedTextColor="@color/colorGrisOscuro"
+                    app:tabTextColor="@color/colorGrisOscuro">
+
+                    <!--<com.google.android.material.tabs.TabItem
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:icon="@drawable/ic_casilla_check_24"/>
+
+                    <com.google.android.material.tabs.TabItem
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:icon="@drawable/ic_check_24"/>-->
+
+
+
+                </com.google.android.material.tabs.TabLayout>
+
 
             </LinearLayout>
 
 
         </com.google.android.material.card.MaterialCardView>
 
-
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/refreshRecycler"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/adView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardView2">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerview"
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewPagerChecks"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardView2" />
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 
 
         <LinearLayout
@@ -193,7 +236,7 @@
             <ImageView
                 android:layout_width="200dp"
                 android:layout_height="200dp"
-                android:layout_marginBottom="100dp"
+                android:layout_marginBottom="50dp"
                 android:src="@drawable/bolsa_compra" />
 
             <TextView
@@ -224,19 +267,35 @@
         android:src="@drawable/add_blanco_24dp"
             app:tint="@color/colorBlanco"
         app:fabSize="normal"
-        android:elevation="6dp"
+        android:elevation="4dp"
         android:backgroundTint="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/adView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:elevation="1dp"
+            app:adSize="BANNER"
+            app:adUnitId="@string/banner"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+        </com.google.android.gms.ads.AdView>
+
+
+<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
 
 
 
 
 <!--    SEGUNDA VISTA ADD Y EDIT ARTICULO -->
-    <androidx.constraintlayout.widget.ConstraintLayout
+   <!-- <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/vista2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -296,8 +355,8 @@
                 android:padding="5dp">
 
 
-               <!-- app:counterEnabled="true"
-                app:counterMaxLength="20"-->
+               &lt;!&ndash; app:counterEnabled="true"
+                app:counterMaxLength="20"&ndash;&gt;
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/etNombreL"
@@ -319,10 +378,10 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-<!--                Si solo le quita el style se ve da la otra forma -->
+&lt;!&ndash;                Si solo le quita el style se ve da la otra forma &ndash;&gt;
 
 
-                <!--<EditText
+                &lt;!&ndash;<EditText
                     android:id="@+id/etN"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -330,7 +389,7 @@
                     android:ems="13"
                     android:hint="@string/nombreproducto"
                     android:inputType="text"
-                    android:padding="8dp" />-->
+                    android:padding="8dp" />&ndash;&gt;
 
                 <ImageView
                     android:id="@+id/ivIconoSeleccion"
@@ -391,7 +450,7 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!--<EditText
+                &lt;!&ndash;<EditText
                     android:id="@+id/etCantidad"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -411,7 +470,7 @@
                     android:ems="13"
                     android:hint="@string/precio"
                     android:inputType="number"
-                    android:padding="8dp" />-->
+                    android:padding="8dp" />&ndash;&gt;
 
             </LinearLayout>
 
@@ -439,7 +498,7 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!--<EditText
+                &lt;!&ndash;<EditText
                     android:id="@+id/etNota"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -447,7 +506,7 @@
                     android:ems="13"
                     android:hint="@string/nota"
                     android:inputType="text"
-                    android:padding="8dp" />-->
+                    android:padding="8dp" />&ndash;&gt;
 
             </LinearLayout>
 
@@ -473,24 +532,9 @@
             app:layout_constraintEnd_toEndOf="parent" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>-->
 
 
-
-    <com.google.android.gms.ads.AdView
-        android:id="@+id/adView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:elevation="1dp"
-        app:adSize="BANNER"
-        app:adUnitId="@string/banner"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-    </com.google.android.gms.ads.AdView>
 
 
 

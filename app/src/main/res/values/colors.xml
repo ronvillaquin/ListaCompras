@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#9ccc65</color>
-    <color name="colorPrimaryDark">#6b9b37</color>
-    <color name="colorAccent">#9ccc65</color>
+    <color name="colorPrimary">#4caf50</color>
+<!--    <color name="colorPrimaryDark">#00b248</color>-->
+    <color name="colorPrimaryDark">#4caf50</color>
+    <color name="colorAccent">#4caf50</color>
 <!--    <color name="colorAccent">#03DAC5</color>-->
 
 
@@ -11,6 +12,7 @@
     <color name="colorGrisClaro">#AAAAAA</color>
     <color name="colorGrisOscuro">#6F6F6F</color>
     <color name="colorGrisProducto">#CFD8DC</color>
+    <color name="sombreproductoCheck">#f5f5f5</color>
     <color name="colorHint">#CFD8DC</color>
 
     <color name="colorRojo">#C50909</color>

@@ -37,7 +37,7 @@
 
 
     <!--    Este es mi baner-->
-            <string name="banner">ca-app-pub-3019606122027900/9370036752</string>
+        <string name="banner">ca-app-pub-3019606122027900/9370036752</string>
     <!--    este es prueba-->
 <!--    <string name="banner">ca-app-pub-3940256099942544/6300978111</string>-->
 
@@ -192,6 +192,8 @@
     <string name="abrir">Abrir</string>
     <string name="cerrar">Cerrar</string>
 
+    <string name="editarProducto">Editar Producto</string>
+
     <!--    para menu de listas-->
 
     <string name="seleccionar">Seleccionar todo</string>
@@ -215,5 +217,7 @@
 
     <string name="nombredelalista">Nombre de la lista</string>
     <string name="cancelar">Cancelar</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

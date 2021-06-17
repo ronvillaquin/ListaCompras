@@ -388,7 +388,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="100dp"
+            android:layout_marginBottom="50dp"
             android:text="@string/agregarAmigos"
             android:textColor="@color/colorGrisClaro"
             android:textSize="20sp" />

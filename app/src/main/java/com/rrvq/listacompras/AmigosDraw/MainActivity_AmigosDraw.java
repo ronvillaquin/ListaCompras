@@ -16,6 +16,7 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -130,8 +131,8 @@ public class MainActivity_AmigosDraw extends AppCompatActivity {
 
     public void toolbarMenu() {
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-//        getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>" + nombre_lista + "</font>"));
+//        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>" + getResources().getString(R.string.amigos) + "</font>"));
     }
     public void flechaBlanca() {
 
@@ -150,7 +151,6 @@ public class MainActivity_AmigosDraw extends AppCompatActivity {
 
 
                 obtenerAmigos();
-                adapterAmigos.notifyDataSetChanged();
 
                 //swipe tiempo de demora del circulo pprogreso
 //                swipeRefreshLayout.setRefreshing(false);
@@ -251,6 +251,8 @@ public class MainActivity_AmigosDraw extends AppCompatActivity {
 //                Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_SHORT).show();
 
                 setRecyclerView();
+                //para que no de error cuando no hay conexion
+                adapterAmigos.notifyDataSetChanged();
 
             }
         }, new Response.ErrorListener() {

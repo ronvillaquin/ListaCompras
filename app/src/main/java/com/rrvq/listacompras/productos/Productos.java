@@ -1,5 +1,6 @@
 package com.rrvq.listacompras.productos;
 
+
 public class Productos {
 
     String idProducto;

@@ -192,7 +192,9 @@
     <string name="premium">PREMIUM</string>
 
     <string name="abrir">Open</string>
-    <string name="cerrar">To close</string>
+    <string name="cerrar">Close</string>
+
+    <string name="editarProducto">Edit Product</string>
 
     <!--    para menu de listas-->
 
@@ -217,5 +219,8 @@
 
     <string name="nombredelalista">List name</string>
     <string name="cancelar">Cancel</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
