@@ -163,7 +163,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
                 obtenerLista();
-                adapterListas.notifyDataSetChanged();
 
                 //swipe tiempo de demora del circulo pprogreso
 //                swipeRefreshLayout.setRefreshing(false);
@@ -293,6 +292,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //                Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_SHORT).show();
 
                 setRecyclerView();
+
+                //colocar aqui para que no de error cuando no tiene inter
+                adapterListas.notifyDataSetChanged();
 
             }
         }, new Response.ErrorListener() {

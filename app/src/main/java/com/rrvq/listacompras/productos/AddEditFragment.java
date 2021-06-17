@@ -3,13 +3,10 @@ package com.rrvq.listacompras.productos;
 import android.content.Context;
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,8 +67,6 @@ public class AddEditFragment extends Fragment {
     private String icono_art = "abarrotes";
 
     private String add_edit,idP, nombreP, precioP, cantidadP, notaP, iconoP, id_lista;
-
-
 
 
 

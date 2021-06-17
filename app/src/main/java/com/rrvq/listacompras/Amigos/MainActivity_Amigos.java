@@ -100,7 +100,7 @@ public class MainActivity_Amigos extends AppCompatActivity {
 
         castinView();
         toolbarMenu();
-        flechaBlanca();
+//        flechaBlanca();
         datosSqlite();
 
         verificar();
@@ -214,7 +214,6 @@ public class MainActivity_Amigos extends AppCompatActivity {
 
 
                 obtenerAmigos();
-                adapterAmigos.notifyDataSetChanged();
 
                 //swipe tiempo de demora del circulo pprogreso
 //                swipeRefreshLayout.setRefreshing(false);
@@ -332,6 +331,9 @@ public class MainActivity_Amigos extends AppCompatActivity {
 //                Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_SHORT).show();
 
                 setRecyclerView();
+
+                adapterAmigos.notifyDataSetChanged();
+
 
             }
         }, new Response.ErrorListener() {

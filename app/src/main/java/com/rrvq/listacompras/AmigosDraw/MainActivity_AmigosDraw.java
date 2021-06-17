@@ -151,7 +151,6 @@ public class MainActivity_AmigosDraw extends AppCompatActivity {
 
 
                 obtenerAmigos();
-                adapterAmigos.notifyDataSetChanged();
 
                 //swipe tiempo de demora del circulo pprogreso
 //                swipeRefreshLayout.setRefreshing(false);
@@ -252,6 +251,8 @@ public class MainActivity_AmigosDraw extends AppCompatActivity {
 //                Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_SHORT).show();
 
                 setRecyclerView();
+                //para que no de error cuando no hay conexion
+                adapterAmigos.notifyDataSetChanged();
 
             }
         }, new Response.ErrorListener() {

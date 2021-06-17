@@ -8,8 +8,8 @@ public class Constantes {
 
     Context context;
 
-//    public static final String INTERSTICIAL = "ca-app-pub-3019606122027900/8749526208"; // este es mio
-    public static final String INTERSTICIAL = "ca-app-pub-3940256099942544/1033173712";  // este es de prueba
+    public static final String INTERSTICIAL = "ca-app-pub-3019606122027900/8749526208"; // este es mio
+//    public static final String INTERSTICIAL = "ca-app-pub-3940256099942544/1033173712";  // este es de prueba
 
     public static final String KEY_FRAGMET = "DATA";
 
