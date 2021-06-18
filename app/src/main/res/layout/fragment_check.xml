@@ -7,10 +7,12 @@
     android:orientation="vertical">
 
         <ImageView
-            android:layout_width="64dp"
-            android:layout_height="64dp"
+            android:id="@+id/imgReycler"
+            android:layout_width="128dp"
+            android:layout_height="128dp"
             android:layout_gravity="center"
-            android:src="@drawable/aceites"/>
+            android:visibility="gone"
+            android:src="@drawable/recyclervacio"/>
 
 
         <androidx.recyclerview.widget.RecyclerView
