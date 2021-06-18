@@ -100,7 +100,7 @@ public class MainActivity_Amigos extends AppCompatActivity {
 
         castinView();
         toolbarMenu();
-//        flechaBlanca();
+        flechaBlanca();
         datosSqlite();
 
         verificar();

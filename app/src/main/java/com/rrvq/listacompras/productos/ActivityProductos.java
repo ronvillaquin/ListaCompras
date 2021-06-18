@@ -98,8 +98,6 @@ public class ActivityProductos extends AppCompatActivity {
 
     AdView mAdView;
 
-    LinearLayout linearImgAdd;
-
     String nombre, apellido, id_usuario, editable;
 
     InterstitialAd mInterstitialAd;
@@ -224,7 +222,6 @@ public class ActivityProductos extends AppCompatActivity {
 
         tvAmigos = findViewById(R.id.tvamigos);
 
-        linearImgAdd = findViewById(R.id.linearImgAdd);
 
         mAdView = findViewById(R.id.adView);
 
@@ -471,7 +468,6 @@ public class ActivityProductos extends AppCompatActivity {
 
                             Toast.makeText(getApplicationContext(), getResources().getString(R.string.sinproductos), Toast.LENGTH_SHORT).show();
 
-                            linearImgAdd.setVisibility(View.VISIBLE);
                             editable = jsonObject.getString("editable");
                             //si esta vacio llama a agregar producto
                             llamarFragmentAdd();
@@ -490,7 +486,6 @@ public class ActivityProductos extends AppCompatActivity {
 
                                 }
 
-                            linearImgAdd.setVisibility(View.INVISIBLE);
 
                         }
 

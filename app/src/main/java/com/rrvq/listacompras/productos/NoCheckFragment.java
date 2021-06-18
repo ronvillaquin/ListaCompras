@@ -39,6 +39,8 @@ public class NoCheckFragment extends Fragment {
     String editable;
     String icono_art = "abarrotes";
 
+    ImageView imgRecycler;
+
     public NoCheckFragment() {
         // Required empty public constructor
     }
@@ -68,6 +70,8 @@ public class NoCheckFragment extends Fragment {
         recyclerViewNoCheck = view.findViewById(R.id.recyclerviewNOCheck);
 //        swipeRefreshLayout = view.findViewById(R.id.refreshRecycler);
 
+        imgRecycler = view.findViewById(R.id.imgReycler);
+
     }
 
 
@@ -90,6 +94,12 @@ public class NoCheckFragment extends Fragment {
 
 
     public void setRecyclerView(){
+
+        if (data.size() == 0){
+            imgRecycler.setVisibility(View.VISIBLE);
+        }else {
+            imgRecycler.setVisibility(View.GONE);
+        }
 
         recyclerViewNoCheck.setLayoutManager(new LinearLayoutManager(getContext()));
         adapterProductos = new AdapterProductos(getContext(), data);
@@ -194,7 +204,7 @@ public class NoCheckFragment extends Fragment {
 
         recyclerViewNoCheck.setAdapter(adapterProductos);
 
-        adapterProductos.notifyDataSetChanged();
+//        adapterProductos.notifyDataSetChanged();
 
 
 //        progressDialog.dismiss();
@@ -266,6 +276,8 @@ public class NoCheckFragment extends Fragment {
 
             setRecyclerView();
 
+            adapterProductos.notifyDataSetChanged();
+
 
 
         } catch (JSONException e) {
@@ -280,6 +292,12 @@ public class NoCheckFragment extends Fragment {
         super.onResume();
 //        Toast.makeText(getContext(), "acaba de iniciar NO", Toast.LENGTH_SHORT).show();
         agregaritemDATA();
+
+        if (data.size() == 0){
+            imgRecycler.setVisibility(View.VISIBLE);
+        }else {
+            imgRecycler.setVisibility(View.GONE);
+        }
     }
 
 

@@ -342,8 +342,8 @@
                     android:visibility="invisible">
 
                     <ImageView
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
+                        android:layout_width="128dp"
+                        android:layout_height="128dp"
                         android:layout_marginTop="30dp"
                         android:src="@drawable/amigos_add" />
 
