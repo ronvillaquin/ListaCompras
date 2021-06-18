@@ -6,6 +6,12 @@
     tools:context=".productos.CheckFragment"
     android:orientation="vertical">
 
+        <ImageView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_gravity="center"
+            android:src="@drawable/aceites"/>
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerviewCheck"
